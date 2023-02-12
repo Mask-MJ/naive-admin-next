@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "naive-ui": "^2.34.3",
     "pinia": "^2.0.30",
     "vue": "^3.2.45",

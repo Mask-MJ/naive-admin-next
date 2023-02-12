@@ -20,7 +20,12 @@
     "lib": ["dom", "esnext"],
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "types": ["vite/client", "naive-ui/volar"],
+    "types": [
+      "vite/client",
+      "naive-ui/volar",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client"
+    ],
     "removeComments": true,
     "paths": {
       "@/*": ["src/*"],
