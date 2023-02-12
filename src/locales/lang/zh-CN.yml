@@ -1,0 +1,15 @@
+app:
+  name: 'NG EVmate'
+  logoutTip: '温馨提醒'
+  logoutMessage: '是否确认退出系统?'
+  menuLoading: '菜单加载中...'
+  searchNotData: '暂无搜索结果'
+  toSearch: '确认'
+  toNavigate: '切换'
+header:
+  tooltipEntryFull: '全屏'
+  tooltipExitFull: '退出全屏'
+  tooltipNotify: '消息通知'
+  dropdownItemLoginOut: '退出系统'
+  userInfo: '个人中心'
+  search: '搜索'

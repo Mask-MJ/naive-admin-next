@@ -1,7 +1,3 @@
-<script setup lang="ts">
-  import HelloWorld from './components/HelloWorld.vue';
-</script>
-
 <template>
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -13,9 +9,12 @@
   </div>
   <i class="i-ant-design:alert-filled"></i>
   <i class="i-line-md:sunny-outline"></i>
+
   <HelloWorld msg="Vite + Vue" />
 </template>
-
+<script setup lang="ts">
+  // import HelloWorld from './components/HelloWorld.vue';
+</script>
 <style scoped>
   .logo {
     height: 6em;

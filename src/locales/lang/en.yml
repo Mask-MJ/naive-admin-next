@@ -1,0 +1,15 @@
+app:
+  name: 'NG EVmate'
+  logoutTip: 'Reminder'
+  logoutMessage: 'Confirm to exit the system?'
+  menuLoading: 'Menu loading...'
+  searchNotData: 'No search results yet'
+  toSearch: 'to search'
+  toNavigate: 'to navigate'
+header:
+  tooltipEntryFull: 'Full Screen'
+  tooltipExitFull: 'Exit Full Screen'
+  tooltipNotify: 'Notification'
+  dropdownItemLoginOut: 'Login Out'
+  userInfo: 'User info'
+  search: 'Search'
