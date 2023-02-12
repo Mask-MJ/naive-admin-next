@@ -1,7 +1,46 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import type { UserConfig, ConfigEnv } from 'vite';
+import { loadEnv } from 'vite';
+import { resolve } from 'path';
+import { createProxy, wrapperEnv, createVitePlugins } from './build';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
-});
+export default ({ mode }: ConfigEnv): UserConfig => {
+  const root = process.cwd();
+  const env = loadEnv(mode, root);
+  const viteEnv = wrapperEnv(env);
+  const { VITE_PORT, VITE_PROXY, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv;
+  // const glsl = (await import('vite-plugin-glsl')).default;
+  return {
+    base: VITE_PUBLIC_PATH,
+    root,
+    resolve: {
+      alias: {
+        '@': `${resolve(root, 'src')}`,
+        '#': `${resolve(root, 'types')}`,
+      },
+    },
+    server: {
+      https: true,
+      host: true,
+      port: VITE_PORT,
+      proxy: createProxy(VITE_PROXY),
+    },
+    esbuild: {
+      pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
+    },
+    build: {
+      target: 'es2015',
+      cssTarget: 'chrome80',
+      reportCompressedSize: false,
+      outDir: 'dist',
+      chunkSizeWarningLimit: 2000,
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+        },
+      },
+    },
+    plugins: createVitePlugins(),
+  };
+};
