@@ -11,6 +11,8 @@
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <i class="i-ant-design:alert-filled"></i>
+  <i class="i-line-md:sunny-outline"></i>
   <HelloWorld msg="Vite + Vue" />
 </template>
 

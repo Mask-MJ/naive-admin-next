@@ -5,6 +5,8 @@ specifiers:
   '@commitlint/config-conventional': ^17.4.2
   '@commitlint/cz-commitlint': ^17.4.2
   '@commitlint/prompt-cli': ^17.4.2
+  '@iconify-json/ant-design': ^1.1.4
+  '@iconify-json/line-md': ^1.1.22
   '@intlify/unplugin-vue-i18n': ^0.8.2
   '@types/node': ^18.13.0
   '@typescript-eslint/eslint-plugin': ^5.51.0
@@ -45,6 +47,8 @@ devDependencies:
   '@commitlint/config-conventional': 17.4.2
   '@commitlint/cz-commitlint': 17.4.2_commitizen@4.3.0
   '@commitlint/prompt-cli': 17.4.2
+  '@iconify-json/ant-design': 1.1.4
+  '@iconify-json/line-md': 1.1.22
   '@intlify/unplugin-vue-i18n': 0.8.2_vue-i18n@9.2.2
   '@types/node': 18.13.0
   '@typescript-eslint/eslint-plugin': 5.51.0_z4swst3wuuqk4hlme4ajzslgh4
@@ -1001,6 +1005,24 @@ packages:
         integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==,
       }
     engines: { node: '>=6.9.0' }
+    dev: true
+
+  /@iconify-json/ant-design/1.1.4:
+    resolution:
+      {
+        integrity: sha512-bx8sSFrrJloQUdStRbBn3TMmeKWfbx51aVDF1fEOH/LGKXGiBmtybURjlTdQPwE7S0zhlXcve+agYHuGb2Q9hQ==,
+      }
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/line-md/1.1.22:
+    resolution:
+      {
+        integrity: sha512-bvFgns1zKNh1p5wMZDgVWpVjh70jImSE5WRbMMDn7RCs6pEGAZCD+1Jpaw9foalJkZmB+QBIJhduasfD8rrGcw==,
+      }
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify/types/2.0.0:
