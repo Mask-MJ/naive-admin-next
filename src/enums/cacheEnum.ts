@@ -1,0 +1,1 @@
+export const THEME_SETTINGS = 'THEME__SETTINGS__';

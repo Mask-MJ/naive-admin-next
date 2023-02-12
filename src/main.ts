@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import 'uno.css';
 import App from './App.vue';
 import { setupStore } from '@/store';
+import { setupRouter } from '@/router';
 import { setupI18n } from '@/locales';
 
 const setupApp = () => {
@@ -16,7 +17,7 @@ const setupApp = () => {
   // 多语言
   setupI18n(app);
   // 配置路由
-  // setupRouter(app);
+  setupRouter(app);
   // 路由守卫
   // setupRouterGuard(router);
   app.mount('#app');
