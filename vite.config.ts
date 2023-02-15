@@ -7,10 +7,10 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PORT, VITE_PROXY, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv;
+  const { VITE_PORT, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
   // const glsl = (await import('vite-plugin-glsl')).default;
   return {
-    base: VITE_PUBLIC_PATH,
+    base: './',
     root,
     resolve: {
       alias: {
