@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     Form: typeof import('./../src/components/Form/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
-    FormItem2: typeof import('./../src/components/Form/components/FormItem2.vue')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
     NButton: typeof import('naive-ui')['NButton'];
     NCheckbox: typeof import('naive-ui')['NCheckbox'];
