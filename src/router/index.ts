@@ -17,6 +17,5 @@ export const router = createRouter({
 });
 
 export const setupRouter = async (app: App) => {
-  console.log(routes);
   app.use(router);
 };

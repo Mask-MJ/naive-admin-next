@@ -35,11 +35,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       chunkSizeWarningLimit: 2000,
     },
     css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-        },
-      },
+      preprocessorOptions: {},
     },
     plugins: createVitePlugins(),
   };

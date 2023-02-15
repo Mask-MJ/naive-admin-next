@@ -7,13 +7,31 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default'];
+    Form: typeof import('./../src/components/Form/index.vue')['default'];
+    FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
+    FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
+    FormItem2: typeof import('./../src/components/Form/components/FormItem2.vue')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
+    NButton: typeof import('naive-ui')['NButton'];
+    NCheckbox: typeof import('naive-ui')['NCheckbox'];
+    NCheckboxGroup: typeof import('naive-ui')['NCheckboxGroup'];
     NConfigProvider: typeof import('naive-ui')['NConfigProvider'];
     NDialogProvider: typeof import('naive-ui')['NDialogProvider'];
+    NForm: typeof import('naive-ui')['NForm'];
+    NFormItemGi: typeof import('naive-ui')['NFormItemGi'];
+    NGi: typeof import('naive-ui')['NGi'];
+    NGrid: typeof import('naive-ui')['NGrid'];
+    NIcon: typeof import('naive-ui')['NIcon'];
+    NImage: typeof import('naive-ui')['NImage'];
+    NInput: typeof import('naive-ui')['NInput'];
+    NInputGroup: typeof import('naive-ui')['NInputGroup'];
     NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider'];
     NMessageProvider: typeof import('naive-ui')['NMessageProvider'];
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider'];
+    NRadio: typeof import('naive-ui')['NRadio'];
+    NRadioButton: typeof import('naive-ui')['NRadioButton'];
+    NRadioGroup: typeof import('naive-ui')['NRadioGroup'];
+    NSpace: typeof import('naive-ui')['NSpace'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
   }

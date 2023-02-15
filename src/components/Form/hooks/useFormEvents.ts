@@ -1,0 +1,208 @@
+import type { ComputedRef, Ref } from 'vue';
+import type { BasicFormProps, FormSchema, FormActionType } from '../types/form';
+// import { unref, toRaw, nextTick } from 'vue';
+// import { dateItemType, handleInputNumberValue, defaultValueComponents } from '../helper';
+// import { dateUtil } from '@/utils/dateUtil';
+import {
+  isArray,
+  isFunction,
+  isObject,
+  isEmpty,
+  isString,
+  isUndefined,
+  isNull,
+  merge,
+  cloneDeep,
+  uniqBy,
+} from 'lodash-es';
+
+interface UseFormActionContext {
+  emits: EmitType;
+  getProps: ComputedRef<BasicFormProps>;
+  getSchema: ComputedRef<FormSchema[]>;
+  formModel: Recordable;
+  defaultValueRef: Ref<Recordable>;
+  formElRef: Ref<FormActionType>;
+  schemaRef: Ref<FormSchema[]>;
+}
+export function useFormEvents({
+  emits,
+  getProps,
+  formModel,
+  getSchema,
+  defaultValueRef,
+  formElRef,
+  schemaRef,
+}: UseFormActionContext) {
+  // 重置表单值
+  const resetPaths = async () => {
+    const { resetFunc, submitOnReset } = unref(getProps);
+    // 如果有自定义重置函数 执行自定义重置函数
+    resetFunc && isFunction(resetFunc) && (await resetFunc());
+    // 遍历 formModel 把值置为 defaultValue 或 ''
+    Object.keys(formModel).forEach((key) => {
+      const schema = unref(getSchema).find((item) => item.path === key);
+      const isInput = schema?.component && schema.component === 'NInput';
+      const defaultValue = cloneDeep(defaultValueRef.value[key]);
+      formModel[key] = isInput ? defaultValue || '' : defaultValue;
+    });
+    // 清空校验
+    nextTick(() => restoreValidation());
+    emits('reset', toRaw(formModel));
+    // 如果有设置清空提交查询, 执行查询函数 (例如清空 Table 的筛选 form 重置 Table 数据)
+    submitOnReset && handleSubmit();
+  };
+  // 表单提交
+  const handleSubmit = async (e?: Event): Promise<void> => {
+    e && e.preventDefault();
+    const { submitFunc } = unref(getProps);
+    // 如果有自定义提交函数 执行自定义提交函数
+    if (submitFunc && isFunction(submitFunc)) {
+      await submitFunc();
+      return;
+    }
+    try {
+      const values = await validate();
+      emits('submit', values);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
+  // 验证全部
+  const validate = async () => await unref(formElRef).validate();
+  // 还原到未校验的状态
+  const restoreValidation = async () => unref(formElRef).restoreValidation();
+  // 获取表单值
+  const getPathsValue = () => unref(formModel);
+  // 设置 paths 的值
+  const setPathsValue = async (values: Recordable) => {
+    Object.keys(values).forEach((key) => {
+      // 获取 path 对应的 schema
+      const schema = unref(getSchema).find((item) => item.path === key);
+      schema && (formModel[key] = values[key]);
+    });
+  };
+  // 更新 schema[] 单个 schema 也要数组形式
+  const updateSchema = async (data: Partial<FormSchema>[]) => {
+    const hasPath = data.every(
+      (item) => item.component === 'NDivider' || (Reflect.has(item, 'path') && item.path),
+    );
+    if (!hasPath) {
+      console.error(
+        'All children of the form Schema array that need to be updated must contain the `path` path',
+      );
+      return;
+    }
+    const schema: FormSchema[] = [];
+    unref(getSchema).forEach((val) => {
+      let _val;
+      data.forEach((item) => {
+        if (val.path === item.path) {
+          _val = item;
+        }
+      });
+      if (_val !== undefined && val.path === _val.path) {
+        const newSchema = merge(val, _val);
+        schema.push(newSchema as FormSchema);
+      } else {
+        schema.push(val);
+      }
+    });
+    _setDefaultValue(schema);
+
+    schemaRef.value = uniqBy(schema, 'path');
+  };
+  const _setDefaultValue = (data: FormSchema | FormSchema[]) => {
+    let schemas: FormSchema[] = [];
+    if (isObject(data)) {
+      schemas.push(data as FormSchema);
+    }
+    if (isArray(data)) {
+      schemas = [...data];
+    }
+
+    const obj: Recordable = {};
+    const currentPathsValue = getPathsValue();
+    schemas.forEach((item) => {
+      if (
+        item.component != 'NDivider' &&
+        Reflect.has(item, 'path') &&
+        item.path &&
+        !(isUndefined(item.defaultValue) || isNull(item.defaultValue)) &&
+        (!(item.path in currentPathsValue) ||
+          isUndefined(currentPathsValue[item.path]) ||
+          isNull(currentPathsValue[item.path]) ||
+          isEmpty(currentPathsValue[item.path]))
+      ) {
+        obj[item.path] = item.defaultValue;
+      }
+    });
+    setPathsValue(obj);
+  };
+
+  // 重置 schema 单个 schema 也要数组形式
+  const resetSchema = async (data: Partial<FormSchema>[]) => {
+    const hasPath = data.every(
+      (item) => item.component === 'NDivider' || (Reflect.has(item, 'path') && item.path),
+    );
+    if (!hasPath) {
+      console.error(
+        'All children of the form Schema array that need to be updated must contain the `path` path',
+      );
+      return;
+    }
+    schemaRef.value = data as FormSchema[];
+  };
+  // 在特定的 path 之前插入 schema 单个 schema 也要数组形式
+  const appendSchemaByPath = async (schema: FormSchema[], prefixPath?: string, first = false) => {
+    const schemaList: FormSchema[] = cloneDeep(unref(getSchema));
+    // 获取要插入的下标
+    const index = schemaList.findIndex((schema) => schema.path === prefixPath);
+    if (!prefixPath || index === -1 || first) {
+      first ? schemaList.unshift(...schema) : schemaList.push(...schema);
+      schemaRef.value = schemaList;
+      _setDefaultValue(schema);
+      return;
+    }
+    if (index !== -1) {
+      schemaList.splice(index + 1, 0, ...schema);
+    }
+    _setDefaultValue(schema);
+    schemaRef.value = schemaList;
+  };
+  // 根据 path 移除 schema 单个 schema 也要数组形式
+  const removeSchemaByPath = async (paths: string[]) => {
+    const schemaList: FormSchema[] = cloneDeep(unref(getSchema));
+    if (!paths) {
+      return;
+    }
+
+    for (const path of paths) {
+      _removeSchemaByPath(path, schemaList);
+    }
+    schemaRef.value = schemaList;
+  };
+
+  const _removeSchemaByPath = (path: string, schemaList: FormSchema[]) => {
+    if (isString(path)) {
+      const index = schemaList.findIndex((schema) => schema.path === path);
+      if (index !== -1) {
+        delete formModel[path];
+        schemaList.splice(index, 1);
+      }
+    }
+  };
+
+  return {
+    resetPaths,
+    handleSubmit,
+    restoreValidation,
+    validate,
+    getPathsValue,
+    updateSchema,
+    resetSchema,
+    appendSchemaByPath,
+    removeSchemaByPath,
+    setPathsValue,
+  };
+}

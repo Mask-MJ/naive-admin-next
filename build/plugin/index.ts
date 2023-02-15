@@ -6,6 +6,7 @@ import Unocss from 'unocss/vite';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import Pages from 'vite-plugin-pages';
 import Layouts from 'vite-plugin-vue-layouts';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // import transformerDirective from '@unocss/transformer-directives';
 // import glsl from 'vite-plugin-glsl';
 // import Inspect from 'vite-plugin-inspect';
@@ -15,6 +16,7 @@ export const createVitePlugins = (): PluginOption[] => {
   // const glsl = (await import('vite-plugin-glsl')).default;
   return [
     vue(),
+    vueJsx(),
     mkcert(),
     VueI18nPlugin({
       runtimeOnly: true,
