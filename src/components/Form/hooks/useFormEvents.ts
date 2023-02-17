@@ -61,12 +61,8 @@ export function useFormEvents({
       await submitFunc();
       return;
     }
-    try {
-      const values = await validate();
-      emits('submit', values);
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    await validate();
+    emits('submit', unref(formModel));
   };
   // 验证全部
   const validate = async () => await unref(formElRef).validate();

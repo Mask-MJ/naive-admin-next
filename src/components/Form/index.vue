@@ -3,7 +3,12 @@
     <n-grid v-bind="getGrid">
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.path">
-        <n-form-item-gi :label="schema.label" :path="schema.path" :span="schema.giProps?.span">
+        <n-form-item-gi
+          :label="schema.label"
+          :path="schema.path"
+          :rule="schema.rule"
+          :span="schema.giProps?.span"
+        >
           <FormItem
             :allDefaultValues="defaultValueRef"
             :formProps="getProps"
@@ -90,6 +95,7 @@
         }
       }
     }
+    console.log(schemas);
     if (unref(getProps).showAdvancedButton) {
       return cloneDeep(schemas.filter((schema) => schema.component !== 'NDivider') as FormSchema[]);
     } else {
