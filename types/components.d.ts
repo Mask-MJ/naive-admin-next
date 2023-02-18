@@ -7,15 +7,23 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DarkModeContainer: typeof import('./../src/components/common/DarkModeContainer.vue')['default'];
+    DarkModeSwitch: typeof import('./../src/components/common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
+    HoverContainer: typeof import('./../src/components/common/HoverContainer.vue')['default'];
+    IEpAlarmClock: typeof import('~icons/ep/alarm-clock')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
+    NAvatar: typeof import('naive-ui')['NAvatar'];
+    NBreadcrumb: typeof import('naive-ui')['NBreadcrumb'];
+    NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem'];
     NButton: typeof import('naive-ui')['NButton'];
     NCheckbox: typeof import('naive-ui')['NCheckbox'];
     NCheckboxGroup: typeof import('naive-ui')['NCheckboxGroup'];
     NConfigProvider: typeof import('naive-ui')['NConfigProvider'];
     NDialogProvider: typeof import('naive-ui')['NDialogProvider'];
+    NDropdown: typeof import('naive-ui')['NDropdown'];
     NForm: typeof import('naive-ui')['NForm'];
     NFormItemGi: typeof import('naive-ui')['NFormItemGi'];
     NGi: typeof import('naive-ui')['NGi'];
@@ -24,13 +32,20 @@ declare module '@vue/runtime-core' {
     NImage: typeof import('naive-ui')['NImage'];
     NInput: typeof import('naive-ui')['NInput'];
     NInputGroup: typeof import('naive-ui')['NInputGroup'];
+    NLayout: typeof import('naive-ui')['NLayout'];
+    NLayoutContent: typeof import('naive-ui')['NLayoutContent'];
+    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader'];
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider'];
     NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider'];
+    NMenu: typeof import('naive-ui')['NMenu'];
     NMessageProvider: typeof import('naive-ui')['NMessageProvider'];
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider'];
     NRadio: typeof import('naive-ui')['NRadio'];
     NRadioButton: typeof import('naive-ui')['NRadioButton'];
     NRadioGroup: typeof import('naive-ui')['NRadioGroup'];
+    NScrollbar: typeof import('naive-ui')['NScrollbar'];
     NSpace: typeof import('naive-ui')['NSpace'];
+    NTooltip: typeof import('naive-ui')['NTooltip'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
   }
