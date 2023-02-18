@@ -5,8 +5,9 @@ import '@/styles/index.scss';
 
 import App from './App.vue';
 import { setupStore } from '@/store';
-import { setupRouter } from '@/router';
+import { setupRouter, router } from '@/router';
 import { setupI18n } from '@/locales';
+import { setupRouterGuard } from '@/router/guard';
 
 const setupApp = () => {
   // const appLoading = createApp(AppLoading);
@@ -20,7 +21,7 @@ const setupApp = () => {
   // 配置路由
   setupRouter(app);
   // 路由守卫
-  // setupRouterGuard(router);
+  setupRouterGuard(router);
   app.mount('#app');
 };
 

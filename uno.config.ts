@@ -1,19 +1,13 @@
 import { defineConfig } from 'unocss/vite';
 import presetUno from 'unocss/preset-uno';
 import presetIcons from 'unocss/preset-icons';
+import { icons as antdIcons } from '@iconify-json/ant-design';
+const antdIconNames = Object.keys(antdIcons.icons).map(
+  (iconName) => `i-${antdIcons.prefix}:${iconName}`,
+);
 
 export default defineConfig({
-  exclude: [
-    'node_modules',
-    'dist',
-    '.git',
-    '.husky',
-    '.vscode',
-    'public',
-    'build',
-    'mock',
-    './index.html',
-  ],
+  exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock'],
   presets: [
     presetUno({ dark: 'class' }),
     presetIcons({
@@ -58,5 +52,5 @@ export default defineConfig({
       dark: '#18181c',
     },
   },
-  safelist: [...'prose prose-sm m-auto text-left'.split(' ')],
+  safelist: [...'prose prose-sm m-auto text-left'.split(' '), ...antdIconNames],
 });
