@@ -7,7 +7,7 @@ import type { Menu } from '#/router';
 import { defineStore } from 'pinia';
 import { i18n } from '@/locales';
 import { getMenuList } from '@/api/basic/user';
-import { strFirstLower } from '@/utils/tools';
+import { lowerCase } from '@/utils/tools';
 import { find } from 'lodash-es';
 import pages from '~pages';
 import { transformRouteToMenu } from '../helper/menus-helper';
@@ -44,7 +44,7 @@ export const useRouterStore = defineStore('router-store', {
       // 后台路由转换为一级路由
       routeList.forEach((ele) => {
         ele.children.forEach((e) => {
-          const name = `${strFirstLower(ele.name as string)}-${strFirstLower(e.name as string)}`;
+          const name = `${lowerCase(ele.name as string)}-${lowerCase(e.name as string)}`;
           // 从文件路由中取出相符的 构建路由对象
           const route = find(pages, ['name', name]);
           // 对照后台路由改造文件路由
