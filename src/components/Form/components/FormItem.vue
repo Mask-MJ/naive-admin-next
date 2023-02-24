@@ -47,7 +47,7 @@
 
   <component
     v-else
-    v-bind="getComponentProps(schema)"
+    v-bind="getComponentsProps"
     :is="getComponents(schema.component)"
     :value="formModel[schema.path]"
     @update:value="changeValue($event, schema.path)"
@@ -64,9 +64,10 @@
 <script setup lang="ts">
   import type { FormSchema, BasicFormProps, FormActionType } from '../types/form';
   import type { ComponentType } from '../componentMap';
+  import type { TableActionType } from '@/components/Table/types/table';
 
   import { componentMap } from '../componentMap';
-  // import { isFunction, isBoolean } from 'lodash-es';
+  import { isFunction } from 'lodash-es';
 
   const props = defineProps({
     schema: { type: Object as PropType<FormSchema>, default: () => ({}) },
@@ -78,12 +79,25 @@
       type: Function as PropType<(key: string, value: any, schema: FormSchema) => void>,
       default: null,
     },
+    tableAction: { type: Object as PropType<TableActionType> },
   });
 
   const getComponents = (component: ComponentType) => componentMap.get(component);
-  const getComponentProps = (schema) => {
-    const compProps = schema.componentProps ?? {};
-    return { clearable: true, ...compProps };
+  const getComponentsProps = () => {
+    const { schema, tableAction, formModel, formActionType } = props;
+    // const compProps = schema.componentProps ?? {};
+    let { componentProps = {} } = schema;
+    if (isFunction(componentProps)) {
+      componentProps = componentProps({ schema, tableAction, formModel, formActionType }) ?? {};
+    }
+    if (schema.component === 'NDivider') {
+      componentProps = Object.assign({ type: 'horizontal' }, componentProps, {
+        orientation: 'left',
+        plain: true,
+      });
+    }
+    // return { clearable: true, ...compProps };
+    return componentProps as Recordable;
   };
   const changeValue = (value, key) => {
     props.setFormModel(key, value, props.schema);

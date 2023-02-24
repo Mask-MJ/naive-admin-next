@@ -7,7 +7,7 @@ import type {
   GridItemProps,
   ButtonProps,
 } from 'naive-ui';
-import type { LabelPlacement } from 'naive-ui/es/form/src/interface';
+import type { LabelPlacement, LabelAlign } from 'naive-ui/es/form/src/interface';
 import type { ComponentType } from '../componentMap';
 
 export type ButtonOptions = Partial<ButtonProps> & { label: string };
@@ -29,8 +29,10 @@ export interface BasicFormProps extends FormProps {
   gridProps?: GridProps; // 整个表单通用 Grid 配置
   layout?: layout; // 表单布局方式
   labelPlacement?: LabelPlacement;
+  labelAlign?: LabelAlign;
   labelGridItem?: Partial<GridItemProps>; // 整个表单通用 labelGridItem 配置
   wrapperGridItem?: Partial<GridItemProps>; // 整个表单通用 wrapperGridItem 配置
+  autoAdvancedLine: Number; // 超过 x 行自动折叠
   /** BasicForm 布局配置 */
 
   name?: string;

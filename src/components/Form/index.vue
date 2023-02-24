@@ -1,40 +1,79 @@
 <template>
-  <n-form v-bind="getBindValue" ref="formElRef" :model="formModel">
-    <n-grid v-bind="getGrid">
-      <slot name="formHeader"></slot>
-      <template v-for="schema in getSchema" :key="schema.path">
-        <n-form-item-gi
-          :label="schema.label"
-          :path="schema.path"
-          :rule="schema.rule"
-          :span="schema.giProps?.span"
-        >
-          <FormItem
-            :allDefaultValues="defaultValueRef"
-            :formProps="getProps"
-            :formModel="formModel"
-            :schema="schema"
-            :setFormModel="setFormModel"
-            :formActionType="formActionType"
+  <dark-mode-container class="p-2 rounded-lg shadow-xl mb-4">
+    <n-form v-bind="getBindValue" ref="formElRef" :model="formModel">
+      <n-grid v-bind="getGrid">
+        <slot name="formHeader"></slot>
+        <template v-for="schema in getSchema" :key="schema.path">
+          <n-form-item-gi
+            :tableAction="tableAction"
+            :label="schema.label"
+            :path="schema.path"
+            :rule="schema.rule"
+            :span="schema.giProps?.span"
           >
-            <template #[item]="data" v-for="item in Object.keys($slots)">
-              <slot :name="item" v-bind="data || {}"></slot>
-            </template>
-          </FormItem>
-        </n-form-item-gi>
-      </template>
-
-      <FormAction v-bind="getFormActionBindProps" @toggle-advanced="handleToggleAdvanced">
-        <template
-          #[item]="data"
-          v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']"
-        >
-          <slot :name="item" v-bind="data || {}"></slot>
+            <FormItem
+              :allDefaultValues="defaultValueRef"
+              :formProps="getProps"
+              :formModel="formModel"
+              :schema="schema"
+              :setFormModel="setFormModel"
+              :formActionType="formActionType"
+            >
+              <template #[item]="data" v-for="item in (Object.keys($slots) as any)">
+                <slot :name="item" v-bind="data || {}"></slot>
+              </template>
+            </FormItem>
+          </n-form-item-gi>
         </template>
-      </FormAction>
-      <slot name="formFooter"></slot>
-    </n-grid>
-  </n-form>
+        <n-form-item-gi
+          class="flex flex-row-reverse"
+          suffix
+          v-bind="actionGiOptions"
+          v-if="showActionButtonGroup"
+        >
+          <slot name="resetBefore"></slot>
+          <n-button
+            type="default"
+            v-bind="getResetBtnOptions"
+            @click="resetPaths"
+            v-if="showResetButton"
+          >
+            {{ getResetBtnOptions.label }}
+          </n-button>
+          <slot name="submitBefore"></slot>
+          <n-button
+            type="primary"
+            class="ml-2"
+            v-bind="getSubmitBtnOptions"
+            @click="handleSubmit"
+            v-if="showSubmitButton"
+          >
+            {{ getSubmitBtnOptions.label }}
+          </n-button>
+          <slot name="advanceBefore"></slot>
+          <slot name="advanceBefore"></slot>
+          <n-button
+            class="ml-2"
+            quaternary
+            size="small"
+            @click="handleToggleAdvanced"
+            v-if="isShowAdvancedButton"
+          >
+            {{
+              advanceState.collapsed ? t('components.form.unfold') : t('components.form.putAway')
+            }}
+            <template #icon>
+              <n-icon>
+                <i class="i-ant-design:down-outlined" v-if="advanceState.collapsed"></i>
+                <i class="i-ant-design:up-outlined" v-else></i>
+              </n-icon>
+            </template>
+          </n-button>
+        </n-form-item-gi>
+        <slot name="formFooter"></slot>
+      </n-grid>
+    </n-form>
+  </dark-mode-container>
 </template>
 
 <script setup lang="ts" name="BasicForm">
@@ -45,11 +84,9 @@
   import { dateUtil } from '@/utils/dateUtil';
   import { useFormValues } from './hooks/useFormValues';
   import { useFormEvents } from './hooks/useFormEvents';
-  import { createFormContext } from './hooks/useFormContext';
-
   import FormItem from './components/FormItem.vue';
-  import FormAction from './components/FormAction.vue';
 
+  const { t } = useI18n();
   const attrs = useAttrs();
   const props = defineProps({ ...basicProps });
   const emits = defineEmits([
@@ -59,7 +96,6 @@
     'register',
     'path-value-change',
   ]);
-
   // 表单数据
   const formModel = reactive<Recordable>({});
   // 表单选项默认值
@@ -95,7 +131,6 @@
         }
       }
     }
-    console.log(schemas);
     if (unref(getProps).showAdvancedButton) {
       return cloneDeep(schemas.filter((schema) => schema.component !== 'NDivider') as FormSchema[]);
     } else {
@@ -103,19 +138,38 @@
     }
   });
 
-  // 展开缩起配置
-  const advanceState = reactive<{ collapsed: Boolean; collapsedRows: Number }>({
-    collapsed: getProps.value.gridProps?.collapsed || false, // 是否折叠
-    collapsedRows: getProps.value.gridProps?.collapsedRows || 1, // 折叠后的行数
+  // 当折叠生效或者当 行数超过 3 行时, 显示折叠按钮
+  const isShowAdvancedButton = computed(() => {
+    // 获取所有的 form-item 的 span 加起来是否大于 (form 的 span(默认24) * 3 + 操作栏的 span (默认8) )
+    const allcols = (Number(props.gridProps.cols) || 24) * props.autoAdvancedLine;
+    let len = Number(props.actionGiOptions.span);
+    getSchema.value.forEach((ele) => (len += Number(ele.giProps?.span) || 8));
+    if (getProps.value.gridProps?.collapsed) {
+      return true;
+    } else if (len > allcols) {
+      advanceState.collapsed = true;
+      return true;
+    }
+    return false;
   });
 
-  // 绑定操作栏
-  const getFormActionBindProps = computed(() => ({ ...getProps.value, ...getGrid.value }));
+  // 展开缩起配置
+  const advanceState = reactive<{ collapsed: Boolean; collapsedRows: Number }>({
+    collapsed: isShowAdvancedButton.value ? true : false, // 是否折叠
+    collapsedRows: getProps.value.gridProps?.collapsedRows || 2, // 折叠后的行数
+  });
 
   // 修改折叠状态
-  const handleToggleAdvanced = (collapsed) => {
-    advanceState.collapsed = !collapsed;
+  const handleToggleAdvanced = () => {
+    advanceState.collapsed = !advanceState.collapsed;
   };
+
+  const getResetBtnOptions = computed(() =>
+    Object.assign({ label: t('components.form.resetText') }, props.resetButtonOptions),
+  );
+  const getSubmitBtnOptions = computed(() =>
+    Object.assign({ label: t('components.form.queryText') }, props.submitButtonOptions),
+  );
 
   const { initDefault } = useFormValues({
     getProps,
@@ -143,11 +197,6 @@
     defaultValueRef,
     formElRef: formElRef as Ref<FormActionType>,
     schemaRef: schemaRef as Ref<FormSchema[]>,
-  });
-  // 创建 form 上下文
-  createFormContext({
-    resetAction: resetPaths,
-    submitAction: handleSubmit,
   });
 
   watch(

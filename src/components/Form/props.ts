@@ -1,6 +1,6 @@
 import type { GridProps, GridItemProps, ButtonProps } from 'naive-ui';
-import type { LabelPlacement } from 'naive-ui/es/form/src/interface';
-
+import type { LabelPlacement, LabelAlign } from 'naive-ui/es/form/src/interface';
+import type { TableActionType } from '@/components/Table/types/table';
 import type { FormSchema, PathMapToTime, layout } from './types/form';
 
 export const basicProps = {
@@ -11,6 +11,8 @@ export const basicProps = {
   // 用于将表单内时间区域的应设成 2 个字段
   pathMapToTime: { type: Array as PropType<PathMapToTime>, default: () => [] },
   submitOnReset: { type: Boolean, default: false },
+  // 超过 3 行自动折叠
+  autoAdvancedLine: { type: Number, default: 3 },
   autoSetPlaceHolder: { type: Boolean, default: true },
   // 是否显示收起展开按钮
   showAdvancedButton: { type: Boolean, default: false },
@@ -21,7 +23,10 @@ export const basicProps = {
   // 是否显示提交按钮
   showSubmitButton: { type: Boolean, default: true },
   // 操作列 Gi 配置
-  actionGiOptions: Object as PropType<Partial<GridItemProps>>,
+  actionGiOptions: {
+    type: Object as PropType<Partial<GridItemProps>>,
+    default: () => ({ span: 8 }),
+  },
   // 重置按钮配置
   resetButtonOptions: Object as PropType<Partial<ButtonProps>>,
   // 确认按钮配置
@@ -40,11 +45,15 @@ export const basicProps = {
   // showRequireMark: { type: Boolean, default: true },
   // 整个表单通用 labelGridItem 配置
   labelGridItem: Object as PropType<Partial<GridProps>>,
+  labelAlign: { type: String as PropType<LabelAlign>, default: 'right' },
   // 整个表单通用 wrapperGridItem 配置
   wrapperGridItem: Object as PropType<Partial<GridProps>>,
   // 表单布局方式
   layout: { type: String as PropType<layout>, default: 'horizontal' },
   // 整个表单通用 Grid 配置
-  gridProps: Object as PropType<GridProps>,
+  gridProps: { type: Object as PropType<GridProps>, default: () => ({}) },
   labelPlacement: { type: String as PropType<LabelPlacement>, default: 'left' },
+  tableAction: {
+    type: Object as PropType<TableActionType>,
+  },
 };
