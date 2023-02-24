@@ -46,7 +46,6 @@
   const theme = useThemeStore();
   const { isMobile } = useBasicLayout();
   const header = computed(() => {
-    console.log(theme.header.inverted);
     return theme.header;
   });
 
