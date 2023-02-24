@@ -36,3 +36,15 @@ api:
 login:
   loginSuccessTitle: '登录成功'
   loginSuccessDesc: '欢迎回来'
+components:
+  form:
+    putAway: '收起'
+    unfold: '展开'
+    resetText: '重置'
+    queryText: '查询'
+  table:
+    index: '序号'
+    settingDens: '密度'
+    settingDensDefault: '默认'
+    settingDensMiddle: '中等'
+    settingDensSmall: '紧凑'

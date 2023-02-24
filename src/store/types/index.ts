@@ -1,3 +1,4 @@
+import type { RouteRecordRaw } from 'vue-router';
 import type { RemovableRef } from '@vueuse/core';
 import type { Theme } from './theme';
 import type { UserInfo } from '@/api/basic/types/user';
@@ -34,4 +35,21 @@ export interface RouterState {
   lastBuildMenuTime: number;
   // 菜单列表
   menuList: Menu[];
+}
+
+export interface TabState {
+  cacheTabList: RemovableRef<string[]>;
+  tabList: RouteRecordRaw[];
+  // lastDragEndIndex: number;
+  activeTab: string;
+}
+
+/** 多页签Tab的路由 */
+export interface GlobalTabRoute
+  extends Pick<import('vue-router').RouteLocationNormalizedLoaded, 'name' | 'fullPath' | 'meta'> {
+  /** 滚动的位置 */
+  scrollPosition: {
+    left: number;
+    top: number;
+  };
 }

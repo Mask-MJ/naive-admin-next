@@ -38,7 +38,7 @@ export interface Result<T = any> {
   msg: string;
   result: T;
   data: T;
-  row: T;
+  rows: T;
 }
 
 // multipart/form-data: upload file

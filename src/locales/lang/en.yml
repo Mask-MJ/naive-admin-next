@@ -36,3 +36,15 @@ api:
 login:
   loginSuccessTitle: 'Login successful'
   loginSuccessDesc: 'Welcome back'
+components:
+  form:
+    putAway: 'putAway'
+    unfold: 'unfold'
+    resetText: 'reset'
+    queryText: 'query'
+  table:
+    index: 'index'
+    settingDens: 'Density'
+    settingDensDefault: 'Default'
+    settingDensMiddle: 'Middle'
+    settingDensSmall: 'Compact'
