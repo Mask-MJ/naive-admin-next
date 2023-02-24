@@ -14,6 +14,8 @@ declare module 'vue-router' {
     hidden: boolean;
     // 父级名称
     parentName: string;
+    // 是否固定
+    affix?: boolean;
   }
 }
 
