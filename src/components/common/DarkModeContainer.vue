@@ -12,10 +12,9 @@
     inverted?: boolean;
   }
 
-  const props = withDefaults(defineProps<Props>(), {
+  withDefaults(defineProps<Props>(), {
     inverted: false,
   });
-  console.log(props);
 </script>
 
 <style scoped></style>

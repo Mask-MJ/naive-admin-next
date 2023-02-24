@@ -14,24 +14,24 @@
     <n-layout content-style="display:flex; flex-flow: column">
       <n-layout-header>
         <LayoutHeader v-bind="headerProps" />
-        <!-- <LayoutTabs /> -->
+        <LayoutTabs />
       </n-layout-header>
       <n-layout-content content-style="flex: 1">
-        <!-- <LayoutContent /> -->
+        <LayoutContent />
       </n-layout-content>
     </n-layout>
   </n-layout>
-  <!-- <back-top /> -->
-  <!-- <setting-drawer /> -->
+  <back-top />
+  <setting-drawer />
 </template>
 
 <script setup lang="ts">
   import LayoutSider from './components/Sider/index.vue';
   import LayoutHeader from './components/Header/index.vue';
-  // import LayoutTabs from './components/Tabs/index.vue';
-  // import LayoutContent from './components/Content/index.vue';
-  // import BackTop from './components/BackTop/index.vue';
-  // import SettingDrawer from './components/SettingDrawer/index.vue';
+  import LayoutTabs from './components/Tabs/index.vue';
+  import LayoutContent from './components/Content/index.vue';
+  import BackTop from './components/BackTop/index.vue';
+  import SettingDrawer from './components/SettingDrawer/index.vue';
   const app = useAppStore();
   const theme = useThemeStore();
   const width = computed(() => theme.sider.width);
