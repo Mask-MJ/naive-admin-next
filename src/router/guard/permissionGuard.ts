@@ -46,7 +46,7 @@ export function createPermissionGuard(router: Router) {
     }
 
     // 判断是否存有用户信息
-    if (userStore.userInfo) {
+    if (Object.keys(userStore.userInfo).length === 0) {
       try {
         await userStore.getUserInfoAction();
       } catch (err) {

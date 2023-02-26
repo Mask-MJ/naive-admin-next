@@ -3,13 +3,10 @@ import type { RemovableRef } from '@vueuse/core';
 import type { Theme } from './theme';
 import type { UserInfo } from '@/api/basic/types/user';
 import type { Menu } from '#/router';
-// import type { MenuOption } from 'naive-ui';
-// import type { MenuGroupOption } from 'naive-ui';
 
 export type ThemeState = RemovableRef<Theme>;
-
 export interface UserState {
-  userInfo: RemovableRef<UserInfo | null>;
+  userInfo: RemovableRef<UserInfo | {}>;
   token: RemovableRef<string | undefined>;
   roles: string[];
   // 权限代码列表
