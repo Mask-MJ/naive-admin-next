@@ -7,19 +7,15 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./../src/components/Form/index copy.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
     HoverContainer: typeof import('./../src/components/common/HoverContainer.vue')['default'];
-    IEpAlarmClock: typeof import('~icons/ep/alarm-clock')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
     NAvatar: typeof import('naive-ui')['NAvatar'];
     NBackTop: typeof import('naive-ui')['NBackTop'];
-    NBreadcrumb: typeof import('naive-ui')['NBreadcrumb'];
-    NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem'];
     NButton: typeof import('naive-ui')['NButton'];
     NCheckbox: typeof import('naive-ui')['NCheckbox'];
     NCheckboxGroup: typeof import('naive-ui')['NCheckboxGroup'];
@@ -33,7 +29,6 @@ declare module '@vue/runtime-core' {
     NDropdown: typeof import('naive-ui')['NDropdown'];
     NForm: typeof import('naive-ui')['NForm'];
     NFormItemGi: typeof import('naive-ui')['NFormItemGi'];
-    NGi: typeof import('naive-ui')['NGi'];
     NGradientText: typeof import('naive-ui')['NGradientText'];
     NGrid: typeof import('naive-ui')['NGrid'];
     NGridItem: typeof import('naive-ui')['NGridItem'];
@@ -63,10 +58,7 @@ declare module '@vue/runtime-core' {
     NTooltip: typeof import('naive-ui')['NTooltip'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
-    Src: typeof import('./../src/components/Form2/src/index.vue')['default'];
     Table: typeof import('./../src/components/Table/index.vue')['default'];
-    Toolbar: typeof import('./../src/components/Table/components/toolbar.vue')['default'];
     Toolbars: typeof import('./../src/components/Table/components/toolbars.vue')['default'];
-    VxeBasicTable: typeof import('./../src/components/VxeTable2/src/VxeBasicTable.vue')['default'];
   }
 }
