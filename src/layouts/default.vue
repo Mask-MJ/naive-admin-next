@@ -11,7 +11,7 @@
     >
       <LayoutSider />
     </n-layout-sider>
-    <n-layout content-style="display:flex; flex-flow: column">
+    <n-layout content-style="display:flex; flex-flow: column; height: 100%">
       <n-layout-header>
         <LayoutHeader v-bind="headerProps" />
         <LayoutTabs />
