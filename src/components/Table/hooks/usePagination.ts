@@ -3,7 +3,7 @@ import type { PaginationProps } from 'naive-ui';
 import type { BasicTableProps } from '../types/table';
 
 import { isBoolean } from 'lodash-es';
-import { FETCH_SETTING, PAGE_SIZE, PAGE_SIZE_OPTIONS } from '../const';
+import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from '../const';
 
 export function usePagination(refProps: ComputedRef<BasicTableProps>) {
   const configRef = ref({});
@@ -13,10 +13,7 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
     () => unref(refProps).pagination,
     (pagination) => {
       if (!isBoolean(pagination) && pagination) {
-        configRef.value = {
-          ...unref(configRef),
-          ...(pagination ?? {}),
-        };
+        configRef.value = { ...unref(configRef), ...(pagination ?? {}) };
       }
     },
   );
@@ -26,7 +23,6 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
     if (!unref(show) || (isBoolean(pagination) && !pagination)) {
       return false;
     }
-    const { totalField } = FETCH_SETTING;
     return {
       pageSize: PAGE_SIZE,
       pageSizes: PAGE_SIZE_OPTIONS,
@@ -34,9 +30,9 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
       showQuickJumper: true,
       ...(isBoolean(pagination) ? {} : pagination),
       ...unref(configRef),
-      pageCount: unref(configRef)[totalField],
     };
   });
+  console.log(getPaginationInfo);
   /** 获取分页配置信息 */
   const getPagination = () => unref(getPaginationInfo);
   /** 设置分页配置信息 */

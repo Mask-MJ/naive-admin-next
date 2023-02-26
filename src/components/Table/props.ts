@@ -10,6 +10,7 @@ export const basicProps = {
   striped: { type: Boolean, default: true },
   singleLine: { type: Boolean, default: false },
   remote: { type: Boolean, default: true },
+  size: { type: String, default: 'small' },
   // 扩展
   // 请求接口
   api: { type: Function as PropType<(...arg: any[]) => Promise<any>>, default: null },

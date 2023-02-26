@@ -1,6 +1,7 @@
 <template>
-  <dark-mode-container class="p-4 rounded-lg shadow-xl mb-4">
+  <dark-mode-container class="rounded-lg shadow-xl mb-4">
     <BasicForm
+      class="p-4"
       ref="formRef"
       submitOnReset
       v-bind="getFormProps"
@@ -14,14 +15,21 @@
       </template>
     </BasicForm>
 
-    <div class="flex items-center justify-between mb-2">
+    <div class="flex items-center justify-between px-4">
       <div>
         <slot name="tableTitle"></slot>
       </div>
-      <toolbars v-bind="getProps" />
+      <toolbars class="mt-2" v-bind="getProps" />
     </div>
 
-    <n-data-table ref="tableElRef" v-bind="getBindValues" @change="handleTableChange">
+    <n-data-table
+      class="h-120 p-2"
+      ref="tableElRef"
+      v-bind="getBindValues"
+      flex-height
+      @update:page="updatePage"
+      @update:page-size="updatePageSize"
+    >
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data"></slot>
       </template>
@@ -47,7 +55,7 @@
   const slots = useSlots();
   const attrs = useAttrs();
   const props = defineProps(basicProps);
-  const emits = defineEmits(['change', 'register', 'fetch-success']);
+  const emits = defineEmits(['change', 'register', 'fetch-success', 'fetch-error']);
 
   const tableData = ref<Recordable[]>([]);
   const innerPropsRef = ref<Partial<BasicTableProps>>();
@@ -97,7 +105,7 @@
   };
 
   const {
-    handleTableChange: onTableChange,
+    // handleTableChange: onTableChange,
     getDataSourceRef,
     getDataSource,
     getRawDataSource,
@@ -122,13 +130,17 @@
     emits,
   );
 
-  function handleTableChange(...args) {
-    onTableChange.call(undefined, ...args);
-    emits('change', ...args);
-    // 解决通过useTable注册onChange时不起作用的问题
-    // const { onChange } = unref(getProps);
-    // onChange && isFunction(onChange) && onChange.call(undefined, ...args);
-  }
+  //页码切换
+  const updatePage = (page) => {
+    setPagination({ page: page });
+    reload();
+  };
+
+  //分页数量切换
+  const updatePageSize = (size) => {
+    setPagination({ page: 1, pageSize: size });
+    reload();
+  };
 
   const { getExpandOption, expandAll, collapseAll } = useTableExpand(getProps, tableData, emits);
 

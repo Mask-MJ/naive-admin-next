@@ -57,8 +57,6 @@ const transform: AxiosTransform = {
     if (hasSuccess) {
       if (data.data) {
         return data.data;
-      } else if (data.rows) {
-        return data.rows;
       } else {
         return data;
       }

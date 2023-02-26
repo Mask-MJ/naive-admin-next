@@ -117,7 +117,7 @@ export function useDataSource(
       deleteRow(dataSourceRef.value, key);
       deleteRow(unref(propsRef).data, key);
     }
-    setPagination({ pageCount: unref(propsRef).data?.length });
+    setPagination({ itemCount: unref(propsRef).data?.length });
   };
 
   const insertTableDataRecord = (
@@ -186,6 +186,7 @@ export function useDataSource(
       }
 
       const res = await api(params);
+      console.log(res);
       rawDataSourceRef.value = res;
 
       const isArrayResult = Array.isArray(res);
@@ -197,9 +198,7 @@ export function useDataSource(
       if (Number(resultPageCount)) {
         const pageTotal = Math.ceil(resultPageCount / pageSize);
         if (page > pageTotal) {
-          setPagination({
-            page: pageTotal,
-          });
+          setPagination({ page: pageTotal });
           return await fetch(opt);
         }
       }
@@ -208,23 +207,19 @@ export function useDataSource(
         resultItems = (await afterFetch(resultItems)) || resultItems;
       }
       dataSourceRef.value = resultItems;
-      setPagination({
-        pageCount: resultPageCount || 0,
-      });
+      setPagination({ itemCount: resultPageCount || 0 });
       if (opt && opt.page) {
-        setPagination({
-          page: opt.page || 1,
-        });
+        setPagination({ page: opt.page || 1 });
       }
       emits('fetch-success', {
         items: unref(resultItems),
-        pageCount: resultPageCount,
+        itemCount: resultPageCount,
       });
       return resultItems;
     } catch (error) {
       emits('fetch-error', error);
       dataSourceRef.value = [];
-      setPagination({ pageCount: 0 });
+      setPagination({ itemCount: 0 });
     } finally {
       setLoading(false);
     }
