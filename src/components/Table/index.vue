@@ -1,40 +1,43 @@
 <template>
-  <dark-mode-container class="rounded-lg shadow-xl mb-4">
-    <BasicForm
-      class="p-4"
-      ref="formRef"
-      submitOnReset
-      v-bind="getFormProps"
-      v-if="getBindValues.useSearchForm"
-      :tableAction="tableAction"
-      @register="registerForm"
-      @submit="handleSearchInfoChange"
-    >
-      <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
-        <slot :name="item" v-bind="data || {}"></slot>
-      </template>
-    </BasicForm>
-
-    <div class="flex items-center justify-between px-4">
-      <div>
-        <slot name="tableTitle"></slot>
-      </div>
-      <toolbars class="mt-2" v-bind="getProps" />
+  <div class="h-full">
+    <div class="rounded-lg shadow-xl mb-4 overflow-hidden">
+      <BasicForm
+        class="px-2 pt-2"
+        ref="formRef"
+        submitOnReset
+        v-bind="getFormProps"
+        :showActionButtonGroup="true"
+        v-if="getBindValues.useSearchForm"
+        :tableAction="tableAction"
+        @register="registerForm"
+        @submit="handleSearchInfoChange"
+      >
+        <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
+          <slot :name="item" v-bind="data || {}"></slot>
+        </template>
+      </BasicForm>
     </div>
+    <dark-mode-container class="rounded-lg shadow-xl mb-4">
+      <div class="flex items-center justify-between px-2">
+        <div class="mt-2">
+          <slot name="toolbar"></slot>
+        </div>
+        <toolbars class="mt-2 mr-2" v-bind="getProps" />
+      </div>
 
-    <n-data-table
-      class="h-120 p-2"
-      ref="tableElRef"
-      v-bind="getBindValues"
-      flex-height
-      @update:page="updatePage"
-      @update:page-size="updatePageSize"
-    >
-      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
-        <slot :name="item" v-bind="data"></slot>
-      </template>
-    </n-data-table>
-  </dark-mode-container>
+      <n-data-table
+        class="p-2"
+        ref="tableElRef"
+        v-bind="getBindValues"
+        @update:page="updatePage"
+        @update:page-size="updatePageSize"
+      >
+        <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+          <slot :name="item" v-bind="data"></slot>
+        </template>
+      </n-data-table>
+    </dark-mode-container>
+  </div>
 </template>
 
 <script setup lang="ts">

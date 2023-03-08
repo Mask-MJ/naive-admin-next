@@ -11,6 +11,7 @@ export const basicProps = {
   singleLine: { type: Boolean, default: false },
   remote: { type: Boolean, default: true },
   size: { type: String, default: 'small' },
+  scrollX: { type: Number, default: 1000 },
   // 扩展
   // 请求接口
   api: { type: Function as PropType<(...arg: any[]) => Promise<any>>, default: null },

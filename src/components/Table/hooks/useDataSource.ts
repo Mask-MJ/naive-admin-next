@@ -186,7 +186,6 @@ export function useDataSource(
       }
 
       const res = await api(params);
-      console.log(res);
       rawDataSourceRef.value = res;
 
       const isArrayResult = Array.isArray(res);
