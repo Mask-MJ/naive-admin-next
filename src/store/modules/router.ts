@@ -44,12 +44,14 @@ export const useRouterStore = defineStore('router-store', {
       // 后台路由转换为一级路由
       routeList.forEach((ele) => {
         ele.children.forEach((e) => {
-          const name = `${lowerCase(ele.name as string)}-${lowerCase(e.name as string)}`;
+          let name = `${lowerCase(ele.name as string)}-${lowerCase(e.name as string)}`;
+          // if (name)
+          name = name.replace('/:', '-');
           // 从文件路由中取出相符的 构建路由对象
           const route = find(pages, ['name', name]);
           // 对照后台路由改造文件路由
           if (route) {
-            route.meta = { ...e.meta, parentName: ele.name, hidden: ele.hidden };
+            route.meta = { ...e.meta, parentName: ele.name, hidden: e.hidden };
             routes.push(route);
           }
         });
