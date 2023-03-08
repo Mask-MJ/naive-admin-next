@@ -24,7 +24,7 @@ export const createVitePlugins = (): PluginOption[] => {
     }),
     Pages({
       dirs: [{ dir: 'src/views', baseRoute: '' }],
-      exclude: ['**/components/*.vue'],
+      exclude: ['**/components/*.vue', '**/modal/*', '**/data.ts'],
     }),
     Layouts(),
     Unocss(),
