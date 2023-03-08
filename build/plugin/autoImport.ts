@@ -18,7 +18,7 @@ export const configAutoImportPlugin = () => [
       },
     ],
     vueTemplate: true,
-    dirs: ['src/store/modules', 'src/components', 'src/composables'],
+    dirs: ['src/store/modules', 'src/composables'],
     dts: 'types/auto-imports.d.ts',
   }),
   Components({
