@@ -1,0 +1,57 @@
+<template>
+  <BasicModal
+    title="选择用户"
+    :style="{ width: '1200px' }"
+    @register="registerModal"
+    @positive-click="handleSubmit"
+  >
+    <BasicTable class="h-100" @register="registerTable" />
+  </BasicModal>
+</template>
+
+<script setup lang="ts">
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { BasicTable, useTable } from '@/components/Table';
+  import { getUnAllocatedList, selectUser } from '@/api/system/assign';
+  import { columns, schemas } from '../data';
+
+  const emits = defineEmits(['success', 'register']);
+  const roleId = ref();
+
+  const [registerModal, { closeModal }] = useModalInner(async (data) => {
+    roleId.value = data.roleId;
+  });
+
+  const [registerTable, { getSelectRowKeys }] = useTable({
+    api: getUnAllocatedList,
+    columns,
+    useSearchForm: true,
+    formConfig: { labelWidth: 100, schemas },
+    bordered: true,
+    searchInfo: { roleId: roleId.value },
+    fetchSetting: { listField: 'rows' },
+    flexHeight: true,
+    rowKey: (rowData) => rowData.userId,
+  });
+
+  const handleSubmit = async () => {
+    try {
+      const userIds = getSelectRowKeys();
+      if (userIds.length === 0) {
+        window.$message.error('请选择要分配的用户');
+      } else {
+        let params = {
+          roleId: Number(roleId.value),
+          userIds: userIds.join(','),
+        };
+        await selectUser(params);
+        emits('success');
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+</script>
+
+<style scoped></style>

@@ -11,7 +11,6 @@ enum Api {
   AllocatedList = '/system/role/authUser/allocatedList',
   UnAllocatedList = '/system/role/authUser/unallocatedList',
   SelectAll = 'system/role/authUser/selectAll',
-  Cancel = '/system/role/authUser/cancel',
   CancelAll = '/system/role/authUser/cancelAll',
   DataScope = '/system/role/dataScope',
 }

@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-  import { NButton } from 'naive-ui';
   import { BasicTable, useTable } from '@/components/Table';
   import { getRoleList, deleteUser } from '@/api/system/role';
   import { columns, schemas } from './data';
@@ -20,6 +19,7 @@
   import setModal from './modal/setModal.vue';
   import depModal from './modal/depModal.vue';
 
+  const router = useRouter();
   const [registerSetModal, { openModal: openSetModel }] = useModal();
   const [registerDepModal, { openModal: openDepModel }] = useModal();
   const [registerTable, { reload }] = useTable({
@@ -49,7 +49,7 @@
               icon: 'i-ant-design:user-outlined',
               tooltip: '分配',
               onClick: () => {
-                // openSetModel(true, { roleId: row.roleId });
+                router.push(`/system/assign/${encodeURIComponent(row.roleId as string)}`);
               },
             },
             {
