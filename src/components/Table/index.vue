@@ -31,6 +31,7 @@
         v-bind="getBindValues"
         @update:page="updatePage"
         @update:page-size="updatePageSize"
+        @update:checked-row-keys="setSelectedRowKeys"
       >
         <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
           <slot :name="item" v-bind="data"></slot>
@@ -41,8 +42,10 @@
 </template>
 
 <script setup lang="ts">
-  import type { BasicTableProps, TableActionType } from './types/table';
+  // import type { DataTableRowKey } from 'naive-ui';
   import type { RowKey } from 'naive-ui/es/data-table/src/interface';
+  import type { BasicTableProps, TableActionType } from './types/table';
+
   import { basicProps } from './props';
   import { remove } from 'lodash-es';
   import { useLoading } from './hooks/useLoading';

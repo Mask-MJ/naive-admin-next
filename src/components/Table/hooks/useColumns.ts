@@ -48,8 +48,7 @@ const handleIndexColumn = (
   if (!pushIndexColumns) return;
 
   const isFixedLeft = columns.some((item) => item.fixed === 'left');
-
-  columns.unshift({
+  const index = {
     flag: INDEX_COLUMN_FLAG,
     key: INDEX_COLUMN_FLAG,
     width: 50,
@@ -65,7 +64,12 @@ const handleIndexColumn = (
       }
     },
     ...(isFixedLeft ? { fixed: 'left' } : {}),
-  });
+  };
+  if (columns[0].type) {
+    columns.splice(1, 0, index as BasicColumn);
+  } else {
+    columns.unshift(index as BasicColumn);
+  }
 };
 
 const handleActionColumn = (propsRef: ComputedRef<BasicTableProps>, columns: BasicColumn[]) => {
@@ -79,7 +83,7 @@ const handleActionColumn = (propsRef: ComputedRef<BasicTableProps>, columns: Bas
       fixed: 'right',
       ...actionColumn,
       flag: ACTION_COLUMN_FLAG,
-    });
+    } as BasicColumn);
   }
 };
 

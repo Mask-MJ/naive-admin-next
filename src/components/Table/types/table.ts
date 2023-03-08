@@ -1,8 +1,9 @@
-import type { DataTableProps, PaginationProps, DataTableBaseColumn } from 'naive-ui';
+import type { DataTableProps, PaginationProps, DataTableColumn } from 'naive-ui';
 import type { BasicFormProps } from '@/components/Form';
 
 // 扩展 column
-export interface BasicColumn extends DataTableBaseColumn {
+export type BasicColumn = DataTableColumn & {
+  key: String;
   // 内部标识 , 序号 | 操作
   flag?: 'INDEX' | 'ACTION';
   slots?: Recordable;
@@ -11,7 +12,7 @@ export interface BasicColumn extends DataTableBaseColumn {
   // 业务控制是否显示
   ifShow?: boolean | ((column: BasicColumn) => boolean);
   children?: BasicColumn[];
-}
+};
 
 export interface FetchSetting {
   // 请求接口当前页数

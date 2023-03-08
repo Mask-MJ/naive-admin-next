@@ -32,7 +32,6 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
       ...unref(configRef),
     };
   });
-  console.log(getPaginationInfo);
   /** 获取分页配置信息 */
   const getPagination = () => unref(getPaginationInfo);
   /** 设置分页配置信息 */
