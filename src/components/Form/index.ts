@@ -1,5 +1,5 @@
-import BasicForm from './index.vue';
+import BasicForm from './src/index.vue';
 
-export * from './types/form';
-export { useForm } from './hooks/useForm';
+export * from './src/types/form';
+export { useForm } from './src/hooks/useForm';
 export { BasicForm };

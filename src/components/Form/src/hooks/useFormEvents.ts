@@ -1,8 +1,6 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { BasicFormProps, FormSchema, FormActionType } from '../types/form';
-// import { unref, toRaw, nextTick } from 'vue';
-// import { dateItemType, handleInputNumberValue, defaultValueComponents } from '../helper';
-// import { dateUtil } from '@/utils/dateUtil';
+
 import {
   isArray,
   isFunction,
@@ -24,6 +22,7 @@ interface UseFormActionContext {
   defaultValueRef: Ref<Recordable>;
   formElRef: Ref<FormActionType>;
   schemaRef: Ref<FormSchema[]>;
+  handleFormValues: Fn;
 }
 export function useFormEvents({
   emits,
@@ -33,6 +32,7 @@ export function useFormEvents({
   defaultValueRef,
   formElRef,
   schemaRef,
+  handleFormValues,
 }: UseFormActionContext) {
   // 重置表单值
   const resetPaths = async () => {
@@ -61,15 +61,28 @@ export function useFormEvents({
       await submitFunc();
       return;
     }
-    await validate();
-    emits('submit', unref(formModel));
+    const formEl = unref(formElRef);
+    if (!formEl) return;
+    try {
+      await validate();
+      const res = handleFormValues(formModel);
+      emits('submit', res);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+    // await validate();
+    // emits('submit', unref(formModel));
   };
   // 验证全部
   const validate = async () => await unref(formElRef).validate();
   // 还原到未校验的状态
   const restoreValidation = async () => unref(formElRef).restoreValidation();
   // 获取表单值
-  const getPathsValue = () => unref(formModel);
+  const getPathsValue = (): Recordable => {
+    const formEl = unref(formElRef);
+    if (!formEl) return {};
+    return handleFormValues(toRaw(unref(formModel)));
+  };
   // 设置 paths 的值
   const setPathsValue = async (values: Recordable) => {
     Object.keys(values).forEach((key) => {
@@ -78,9 +91,16 @@ export function useFormEvents({
       schema && (formModel[key] = values[key]);
     });
   };
-  // 更新 schema[] 单个 schema 也要数组形式
-  const updateSchema = async (data: Partial<FormSchema>[]) => {
-    const hasPath = data.every(
+  // 更新 schema
+  const updateSchema = async (data: Partial<FormSchema> | Partial<FormSchema>[]) => {
+    let updateData: Partial<FormSchema>[] = [];
+    if (isObject(data)) {
+      updateData.push(data as FormSchema);
+    }
+    if (isArray(data)) {
+      updateData = [...data];
+    }
+    const hasPath = updateData.every(
       (item) => item.component === 'NDivider' || (Reflect.has(item, 'path') && item.path),
     );
     if (!hasPath) {
@@ -92,7 +112,7 @@ export function useFormEvents({
     const schema: FormSchema[] = [];
     unref(getSchema).forEach((val) => {
       let _val;
-      data.forEach((item) => {
+      updateData.forEach((item) => {
         if (val.path === item.path) {
           _val = item;
         }
@@ -108,6 +128,7 @@ export function useFormEvents({
 
     schemaRef.value = uniqBy(schema, 'path');
   };
+
   const _setDefaultValue = (data: FormSchema | FormSchema[]) => {
     let schemas: FormSchema[] = [];
     if (isObject(data)) {

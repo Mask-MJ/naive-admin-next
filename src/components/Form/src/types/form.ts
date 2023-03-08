@@ -1,20 +1,19 @@
 import type {
-  FormProps,
   FormItemProps,
-  FormItemRule,
-  FormInst,
-  GridProps,
   GridItemProps,
+  GridProps,
   ButtonProps,
+  FormItemRule,
+  FormProps,
+  FormInst,
 } from 'naive-ui';
 import type { LabelPlacement, LabelAlign } from 'naive-ui/es/form/src/interface';
-import type { ComponentType } from '../componentMap';
+import type { ComponentMap } from './component';
 
-export type ButtonOptions = Partial<ButtonProps> & { label: string };
 // 时间结构
 export type PathMapToTime = [string, [string, string], (string | [string, string])?][];
-// layout
-export type layout = 'horizontal' | 'vertical' | 'inline';
+export type ButtonOptions = Partial<ButtonProps> & { label: string };
+
 // 渲染回调参数
 export interface RenderCallbackParams {
   schema: FormSchema;
@@ -23,11 +22,32 @@ export interface RenderCallbackParams {
   path: string;
 }
 
+// 表单子项配置
+export type FormSchema = ComponentMap &
+  FormItemProps & {
+    path: string;
+    suffix?: string | number | ((values: RenderCallbackParams) => string | number); // 组件后面插槽
+    changeEvent?: string; // 表单更新事件名称
+    giProps?: Partial<GridItemProps>;
+    defaultValue?: any; // 所渲渲染组件的初始值
+    ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否显示，js 控制，会删除 dom
+    render?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件
+    renderGiContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件（需要自行包含 formItem）
+    renderComponentContent?:
+      | ((renderCallbackParams: RenderCallbackParams) => any)
+      | VNode
+      | VNode[]
+      | string; // 自定义渲染组内部的 slot
+    slot?: string; // 自定义 slot，渲染组件
+    giSlot?: string; // 自定义 slot，渲染组件 （需要自行包含 formItem）
+    dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否禁用
+    dynamicRules?: (renderCallbackParams: RenderCallbackParams) => FormItemRule[]; // 动态判返当前组件的校验规则
+  };
+
 // 扩展form组件配置
 export interface BasicFormProps extends FormProps {
   /** BasicForm 布局配置 */
   gridProps?: GridProps; // 整个表单通用 Grid 配置
-  layout?: layout; // 表单布局方式
   labelPlacement?: LabelPlacement;
   labelAlign?: LabelAlign;
   labelGridItem?: Partial<GridItemProps>; // 整个表单通用 labelGridItem 配置
@@ -55,38 +75,6 @@ export interface BasicFormProps extends FormProps {
   resetFunc?: () => Promise<void>;
   submitFunc?: () => Promise<void>;
   transformDateFunc?: (date: any) => string;
-}
-
-// 表单子项配置
-export interface FormSchema extends FormItemProps {
-  path: string;
-  suffix?: string | number | ((values: RenderCallbackParams) => string | number); // 组件后面插槽
-  changeEvent?: string; // 表单更新事件名称
-  valuePath?: string;
-  component: ComponentType; // 需要渲染的组件
-  componentProps?:
-    | ((opt: {
-        schema: FormSchema;
-        formActionType: FormActionType;
-        formModel: Recordable;
-      }) => Recordable)
-    | object
-    | any; // 需要传入渲染组件的 props
-  giProps?: Partial<GridItemProps>;
-  defaultValue?: any; // 所渲渲染组件的初始值
-  ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否显示，js 控制，会删除 dom
-  show?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否显示，css 控制，不会删除 dom
-  render?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件
-  renderGiContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件（需要自行包含 formItem）
-  renderComponentContent?:
-    | ((renderCallbackParams: RenderCallbackParams) => any)
-    | VNode
-    | VNode[]
-    | string; // 自定义渲染组内部的 slot
-  slot?: string; // 自定义 slot，渲染组件
-  giSlot?: string; // 自定义 slot，渲染组件 （需要自行包含 formItem）
-  dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否禁用
-  dynamicRules?: (renderCallbackParams: RenderCallbackParams) => FormItemRule[]; // 动态判返当前组件的校验规则
 }
 
 // 表单操作事件

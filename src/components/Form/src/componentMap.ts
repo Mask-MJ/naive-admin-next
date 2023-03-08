@@ -1,9 +1,9 @@
 import type { Component } from 'vue';
+import type { ComponentType } from './types/component';
 
 import {
   NInput,
   NSelect,
-  NRadioGroup,
   NCheckbox,
   NCheckboxGroup,
   NAutoComplete,
@@ -13,10 +13,13 @@ import {
   NSwitch,
   NTimePicker,
   NTreeSelect,
+  NTree,
   NSlider,
   NRate,
   NDivider,
 } from 'naive-ui';
+import ApiTree from './components/ApiTree.vue';
+import RadioGroup from './components/RadioGroup.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
 
@@ -25,8 +28,10 @@ componentMap.set('NInputNumber', NInputNumber);
 componentMap.set('NAutoComplete', NAutoComplete);
 componentMap.set('NSelect', NSelect);
 componentMap.set('NTreeSelect', NTreeSelect);
+componentMap.set('NTree', NTree);
+componentMap.set('ApiTree', ApiTree);
 componentMap.set('NSwitch', NSwitch);
-componentMap.set('NRadioGroup', NRadioGroup);
+componentMap.set('NRadioGroup', RadioGroup);
 componentMap.set('NCheckbox', NCheckbox);
 componentMap.set('NCheckboxGroup', NCheckboxGroup);
 componentMap.set('NCascader', NCascader);
@@ -35,20 +40,3 @@ componentMap.set('NRate', NRate);
 componentMap.set('NDatePicker', NDatePicker);
 componentMap.set('NTimePicker', NTimePicker);
 componentMap.set('NDivider', NDivider);
-
-export type ComponentType =
-  | 'NInput'
-  | 'NInputNumber'
-  | 'NSelect'
-  | 'NTreeSelect'
-  | 'NRadioGroup'
-  | 'NCheckbox'
-  | 'NCheckboxGroup'
-  | 'NAutoComplete'
-  | 'NCascader'
-  | 'NDatePicker'
-  | 'NTimePicker'
-  | 'NSwitch'
-  | 'NSlider'
-  | 'NDivider'
-  | 'NRate';

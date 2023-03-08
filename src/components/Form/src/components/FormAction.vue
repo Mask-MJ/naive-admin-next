@@ -1,11 +1,11 @@
 <template>
-  <div class="flex">
+  <div class="flex items-center">
     <slot name="resetBefore"></slot>
     <n-button
       type="default"
       class="mr-2"
       v-bind="getResetBtnOptions"
-      @click="formContext.resetAction"
+      @click="resetAction"
       v-if="showResetButton"
     >
       {{ getResetBtnOptions.label }}
@@ -15,17 +15,21 @@
       type="primary"
       class="mr-2"
       v-bind="getSubmitBtnOptions"
-      @click="formContext.submitAction"
+      @click="submitAction"
       v-if="showSubmitButton"
     >
       {{ getSubmitBtnOptions.label }}
     </n-button>
     <slot name="advanceBefore"></slot>
-    <n-button quaternary size="small" @click="toggleAdvanced" v-if="showAdvancedButton">
-      {{ collapsed ? t('components.form.putAway') : t('components.form.unfold') }}
+    <n-button
+      quaternary
+      size="small"
+      @click="toggleAdvanced"
+      v-if="showAdvancedButton && isShowAdvancedButton"
+    >
+      {{ !collapsed ? t('components.form.putAway') : t('components.form.unfold') }}
       <template #icon>
         <n-icon>
-          <!-- <cash-icon /> -->
           <i class="i-ant-design:down-outlined" v-if="collapsed"></i>
           <i class="i-ant-design:up-outlined" v-else></i>
         </n-icon>
@@ -37,22 +41,20 @@
 
 <script setup lang="ts" name="BasicFormAction">
   import type { ButtonOptions } from '../types/form';
-  import { useFormContext } from '../hooks/useFormContext';
 
-  const emits = defineEmits(['toggle-advanced']);
+  const emits = defineEmits(['action']);
   const props = defineProps({
     showActionButtonGroup: { type: Boolean, default: true },
     showResetButton: { type: Boolean, default: true },
     showSubmitButton: { type: Boolean, default: true },
     showAdvancedButton: { type: Boolean, default: true },
+    isShowAdvancedButton: { type: Boolean, default: true },
     collapsed: { type: Boolean, default: true },
     resetButtonOptions: { type: Object as PropType<Partial<ButtonOptions>>, default: () => ({}) },
     submitButtonOptions: { type: Object as PropType<Partial<ButtonOptions>>, default: () => ({}) },
-    // actionGiOptions: { type: Object as PropType<Partial<GridItemProps>>, default: () => ({}) },
   });
 
   const { t } = useI18n();
-  const formContext = useFormContext();
 
   const getResetBtnOptions = computed(() =>
     Object.assign({ label: t('components.form.resetText') }, props.resetButtonOptions),
@@ -61,7 +63,10 @@
     Object.assign({ label: t('components.form.queryText') }, props.submitButtonOptions),
   );
 
-  const toggleAdvanced = () => {
-    emits('toggle-advanced');
-  };
+  /** 重置 */
+  const resetAction = () => emits('action', 'reset');
+  /** 提交 */
+  const submitAction = () => emits('action', 'submit');
+  /** 更改收起状态 */
+  const toggleAdvanced = () => emits('action', 'toggle');
 </script>

@@ -1,7 +1,7 @@
 import type { GridProps, GridItemProps, ButtonProps } from 'naive-ui';
 import type { LabelPlacement, LabelAlign } from 'naive-ui/es/form/src/interface';
 import type { TableActionType } from '@/components/Table/types/table';
-import type { FormSchema, PathMapToTime, layout } from './types/form';
+import type { FormSchema, PathMapToTime } from './types/form';
 
 export const basicProps = {
   // 表单配置规则
@@ -17,7 +17,7 @@ export const basicProps = {
   // 是否显示收起展开按钮
   showAdvancedButton: { type: Boolean, default: false },
   // 是否显示操作按钮
-  showActionButtonGroup: { type: Boolean, default: true },
+  showActionButtonGroup: { type: Boolean, default: false },
   // 显示显示重置按钮
   showResetButton: { type: Boolean, default: true },
   // 是否显示提交按钮
@@ -38,22 +38,21 @@ export const basicProps = {
   // 转化时间
   transformDateFunc: {
     type: Function as PropType<Fn>,
-    default: (date: any) => date?.format?.('YYYY-MM-DD HH:mm:ss') ?? date,
+    default: (date: any) => date?.format?.('yyyy-MM-dd HH:mm:ss') ?? date,
   },
   // 以下为默认props
   // 是否展示必填的星号
   // showRequireMark: { type: Boolean, default: true },
   // 整个表单通用 labelGridItem 配置
-  labelGridItem: Object as PropType<Partial<GridProps>>,
+  labelGridItem: {
+    type: Object as PropType<Partial<GridProps>>,
+    default: () => ({ span: 24 }),
+  },
   labelAlign: { type: String as PropType<LabelAlign>, default: 'right' },
   // 整个表单通用 wrapperGridItem 配置
   wrapperGridItem: Object as PropType<Partial<GridProps>>,
-  // 表单布局方式
-  layout: { type: String as PropType<layout>, default: 'horizontal' },
   // 整个表单通用 Grid 配置
   gridProps: { type: Object as PropType<GridProps>, default: () => ({}) },
   labelPlacement: { type: String as PropType<LabelPlacement>, default: 'left' },
-  tableAction: {
-    type: Object as PropType<TableActionType>,
-  },
+  tableAction: { type: Object as PropType<TableActionType> },
 };
