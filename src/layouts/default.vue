@@ -16,8 +16,10 @@
         <LayoutHeader v-bind="headerProps" />
         <LayoutTabs />
       </n-layout-header>
-      <n-layout-content content-style="flex: 1">
-        <LayoutContent />
+      <n-layout-content class="bg-[#f6f9f8]" content-style="flex: 1">
+        <n-scrollbar class="scrollbar">
+          <LayoutContent />
+        </n-scrollbar>
       </n-layout-content>
     </n-layout>
   </n-layout>

@@ -42,9 +42,15 @@ components:
     unfold: 'unfold'
     resetText: 'reset'
     queryText: 'query'
+    inputText: 'input'
+    chooseText: 'choose'
+    maxTip: 'The number of characters should be less than {0}'
   table:
     index: 'index'
     settingDens: 'Density'
     settingDensDefault: 'Default'
     settingDensMiddle: 'Middle'
     settingDensSmall: 'Compact'
+  modal:
+    positiveText: 'positive'
+    negativeText: 'negative'

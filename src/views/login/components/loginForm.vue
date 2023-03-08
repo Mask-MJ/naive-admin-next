@@ -1,7 +1,7 @@
 <template>
   <div class="loginForm">
     <div class="text-2xl font-bold mb-6">登陆</div>
-    <Form @register="register" @submit="handleSubmit">
+    <BasicForm @register="register" @submit="handleSubmit">
       <template #code="{ model, path }">
         <n-input-group>
           <n-input v-model:value="model[path]" placeholder="请输入图片验证码" />
@@ -14,14 +14,14 @@
           />
         </n-input-group>
       </template>
-    </Form>
+    </BasicForm>
     <n-button block type="primary" :loading="loading" @click="submit">提交</n-button>
   </div>
 </template>
 
 <script setup lang="ts">
-  import type { FormSchema } from '@/components/Form/types/form';
-  import { useForm } from '@/components/Form/hooks/useForm';
+  import type { FormSchema } from '@/components/Form';
+  import { useForm, BasicForm } from '@/components/Form';
   import { getPictureCode } from '@/api/basic/user';
   import { NAvatar } from 'naive-ui';
 
@@ -54,8 +54,9 @@
 
   const [register, { submit }] = useForm({
     labelWidth: 120,
+    size: 'large',
+    gridProps: { collapsed: false },
     schemas,
-    actionGiOptions: { span: 24 },
   });
 
   const { t } = useI18n();

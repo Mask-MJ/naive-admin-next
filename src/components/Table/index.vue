@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <div class="rounded-lg shadow-xl mb-4 overflow-hidden">
+    <dark-mode-container class="rounded-lg shadow-xl mb-4 overflow-hidden">
       <BasicForm
         class="px-2 pt-2"
         ref="formRef"
@@ -16,7 +16,7 @@
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
       </BasicForm>
-    </div>
+    </dark-mode-container>
     <dark-mode-container class="rounded-lg shadow-xl mb-4">
       <div class="flex items-center justify-between px-2">
         <div class="mt-2">

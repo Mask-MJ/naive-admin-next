@@ -42,9 +42,15 @@ components:
     unfold: '展开'
     resetText: '重置'
     queryText: '查询'
+    inputText: '请输入'
+    chooseText: '请选择'
+    maxTip: '字符数应小于{0}位'
   table:
     index: '序号'
     settingDens: '密度'
     settingDensDefault: '默认'
     settingDensMiddle: '中等'
     settingDensSmall: '紧凑'
+  modal:
+    positiveText: '确定'
+    negativeText: '取消'
