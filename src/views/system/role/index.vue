@@ -1,17 +1,17 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <Table @register="registerTable">
       <template #toolbar>
         <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
       </template>
-    </BasicTable>
+    </Table>
     <setModal @register="registerSetModal" @success="reload()" />
     <depModal @register="registerDepModal" @success="reload()" />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { BasicTable, useTable } from '@/components/Table';
+  import { useTable } from '@/components/Table';
   import { getRoleList, deleteUser } from '@/api/system/role';
   import { columns, schemas } from './data';
   import { TableAction } from '@/components/Table';

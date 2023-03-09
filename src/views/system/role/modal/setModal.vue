@@ -1,11 +1,11 @@
 <template>
-  <BasicModal @register="registerModal" @positive-click="handleSubmit">
+  <Modal @register="registerModal" @positive-click="handleSubmit">
     <Form @register="registerForm" />
-  </BasicModal>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { useModalInner } from '@/components/Modal';
   import { setSchemas } from './data';
   import { useForm } from '@/components/Form';
   import { getRole, getRoleMenuTree, setRole, addRole } from '@/api/system/role';

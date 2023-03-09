@@ -1,16 +1,16 @@
 <template>
-  <BasicModal
+  <Modal
     title="选择用户"
     :style="{ width: '1200px' }"
     @register="registerModal"
     @positive-click="handleSubmit"
   >
     <BasicTable class="h-100" @register="registerTable" />
-  </BasicModal>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { useModalInner } from '@/components/Modal';
   import { BasicTable, useTable } from '@/components/Table';
   import { getUnAllocatedList, selectUser } from '@/api/system/assign';
   import { columns, schemas } from '../data';

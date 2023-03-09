@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
     HoverContainer: typeof import('./../src/components/common/HoverContainer.vue')['default'];
+    Modal: typeof import('./../src/components/Modal/index.vue')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
     NAvatar: typeof import('naive-ui')['NAvatar'];
     NBackTop: typeof import('naive-ui')['NBackTop'];
@@ -59,7 +60,6 @@ declare module '@vue/runtime-core' {
     RadioGroup: typeof import('./../src/components/Form/components/RadioGroup.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
-    Src: typeof import('./../src/components/Modal/src/index.vue')['default'];
     Table: typeof import('./../src/components/Table/index.vue')['default'];
     TableAction: typeof import('./../src/components/Table/components/TableAction.vue')['default'];
     Toolbars: typeof import('./../src/components/Table/components/toolbars.vue')['default'];

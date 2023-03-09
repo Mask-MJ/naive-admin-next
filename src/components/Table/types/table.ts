@@ -2,7 +2,7 @@ import type { DataTableProps, PaginationProps, DataTableColumn } from 'naive-ui'
 import type { BasicFormProps } from '@/components/Form';
 
 // 扩展 column
-export type BasicColumn = DataTableColumn & {
+export type BasicColumn<T = any> = DataTableColumn<T> & {
   key: String;
   // 内部标识 , 序号 | 操作
   flag?: 'INDEX' | 'ACTION';
