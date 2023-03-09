@@ -1,4 +1,2 @@
-export { default as BasicModal } from './src/index.vue';
-
-export { useModal, useModalInner } from './src/hooks/useModal';
-export * from './src/type';
+export { useModal, useModalInner } from './hooks/useModal';
+export * from './type';
