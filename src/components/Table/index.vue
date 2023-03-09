@@ -1,7 +1,7 @@
 <template>
   <div class="h-full">
     <dark-mode-container class="rounded-lg shadow-xl mb-4 overflow-hidden">
-      <BasicForm
+      <Form
         class="px-2 pt-2"
         ref="formRef"
         submitOnReset
@@ -15,7 +15,7 @@
         <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
-      </BasicForm>
+      </Form>
     </dark-mode-container>
     <dark-mode-container class="rounded-lg shadow-xl mb-4">
       <div class="flex items-center justify-between px-2">
@@ -50,7 +50,7 @@
   import { remove } from 'lodash-es';
   import { useLoading } from './hooks/useLoading';
   import toolbars from './components/toolbars.vue';
-  import { BasicForm, useForm } from '@/components/Form';
+  import { useForm } from '@/components/Form';
 
   import { useDataSource } from './hooks/useDataSource';
   import { usePagination } from './hooks/usePagination';

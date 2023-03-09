@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useForm } from '@/components/Form/hooks/useForm';
+  import { useForm } from '@/components/Form';
   import { searchFormSchema, columns } from './data';
   import { getAccountList } from '@/api/system/user';
   const dataRef = ref();

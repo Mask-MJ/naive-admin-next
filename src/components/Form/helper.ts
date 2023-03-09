@@ -1,5 +1,5 @@
 import type { FormItemRule } from 'naive-ui';
-import type { ComponentType } from './componentMap';
+import type { ComponentType } from './types/component';
 
 import { i18n } from '@/locales';
 

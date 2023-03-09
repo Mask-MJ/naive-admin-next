@@ -10,7 +10,7 @@ import { loginApi, getUserInfoAsync, doLogout } from '@/api/basic/user';
 export const useUserStore = defineStore('user-store', {
   state: (): UserState => ({
     // user info
-    userInfo: useStorage(USER_INFO_KEY, {}),
+    userInfo: useStorage(USER_INFO_KEY, {} as UserInfo),
     // token
     token: useStorage(TOKEN_KEY, ''),
     // roles
@@ -26,8 +26,8 @@ export const useUserStore = defineStore('user-store', {
     setToken(info?: string) {
       this.token = info;
     },
-    setUserInfo(info?: UserInfo) {
-      this.userInfo = info ? info : {};
+    setUserInfo(info: UserInfo = {} as UserInfo) {
+      this.userInfo = info;
     },
     setRoles(roles: string[]) {
       this.roles = roles;

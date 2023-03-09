@@ -1,7 +1,7 @@
 <template>
   <div class="loginForm">
     <div class="text-2xl font-bold mb-6">登陆</div>
-    <BasicForm @register="register" @submit="handleSubmit">
+    <Form @register="register" @submit="handleSubmit">
       <template #code="{ model, path }">
         <n-input-group>
           <n-input v-model:value="model[path]" placeholder="请输入图片验证码" />
@@ -14,14 +14,14 @@
           />
         </n-input-group>
       </template>
-    </BasicForm>
+    </Form>
     <n-button block type="primary" :loading="loading" @click="submit">提交</n-button>
   </div>
 </template>
 
 <script setup lang="ts">
   import type { FormSchema } from '@/components/Form';
-  import { useForm, BasicForm } from '@/components/Form';
+  import { useForm } from '@/components/Form';
   import { getPictureCode } from '@/api/basic/user';
   import { NAvatar } from 'naive-ui';
 

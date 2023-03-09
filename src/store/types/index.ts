@@ -6,7 +6,7 @@ import type { Menu } from '#/router';
 
 export type ThemeState = RemovableRef<Theme>;
 export interface UserState {
-  userInfo: RemovableRef<UserInfo | {}>;
+  userInfo: RemovableRef<UserInfo>;
   token: RemovableRef<string | undefined>;
   roles: string[];
   // 权限代码列表

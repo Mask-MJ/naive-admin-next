@@ -1,13 +1,13 @@
 <template>
   <BasicModal @register="registerModal" @positive-click="handleSubmit">
-    <BasicForm @register="registerForm" />
+    <Form @register="registerForm" />
   </BasicModal>
 </template>
 
 <script setup lang="ts">
   import { BasicModal, useModalInner } from '@/components/Modal';
   import { setSchemas } from './data';
-  import { BasicForm, useForm } from '@/components/Form';
+  import { useForm } from '@/components/Form';
   import { getRole, getRoleMenuTree, setRole, addRole } from '@/api/system/role';
 
   const emits = defineEmits(['success', 'register']);

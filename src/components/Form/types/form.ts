@@ -46,14 +46,14 @@ export type FormSchema = ComponentMap &
 
 // 扩展form组件配置
 export interface BasicFormProps extends FormProps {
-  /** BasicForm 布局配置 */
+  /** Form 布局配置 */
   gridProps?: GridProps; // 整个表单通用 Grid 配置
   labelPlacement?: LabelPlacement;
   labelAlign?: LabelAlign;
   labelGridItem?: Partial<GridItemProps>; // 整个表单通用 labelGridItem 配置
   wrapperGridItem?: Partial<GridItemProps>; // 整个表单通用 wrapperGridItem 配置
   autoAdvancedLine: Number; // 超过 x 行自动折叠
-  /** BasicForm 布局配置 */
+  /** Form 布局配置 */
 
   name?: string;
   schemas?: FormSchema[]; // 表单配置规则

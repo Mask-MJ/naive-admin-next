@@ -22,8 +22,6 @@ export const configAutoImportPlugin = () => [
     dts: 'types/auto-imports.d.ts',
   }),
   Components({
-    extensions: ['vue'],
-    include: [/\.vue$/, /\.vue\?vue/],
     dts: 'types/components.d.ts',
     resolvers: [IconsResolver(), NaiveUiResolver()],
   }),

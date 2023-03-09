@@ -33,10 +33,7 @@ export const useMultipleTabStore = defineStore('tab-store', {
         hidden: false,
         parentName: '',
       },
-      scrollPosition: {
-        left: 0,
-        top: 0,
-      },
+      scrollPosition: { left: 0, top: 0 },
     },
     activeTab: '',
   }),
@@ -45,6 +42,9 @@ export const useMultipleTabStore = defineStore('tab-store', {
     activeTabIndex(state) {
       const { tabs, activeTab } = state;
       return tabs.findIndex((tab) => tab.fullPath === activeTab);
+    },
+    getCacheTabList(): string[] {
+      return [];
     },
   },
   actions: {
@@ -210,10 +210,7 @@ export const useMultipleTabStore = defineStore('tab-store', {
      * @param fullPath - 路由fullPath
      */
     getTabScrollPosition(fullPath: string) {
-      const position = {
-        left: 0,
-        top: 0,
-      };
+      const position = { left: 0, top: 0 };
       const index = getIndexInTabRoutes(this.tabs, fullPath);
       if (index > -1) {
         Object.assign(position, this.tabs[index].scrollPosition);

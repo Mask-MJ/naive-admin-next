@@ -1,12 +1,12 @@
 <template>
   <BasicModal title="分配数据权限" @register="registerModal" @positive-click="handleSubmit">
-    <BasicForm @register="registerForm" />
+    <Form @register="registerForm" />
   </BasicModal>
 </template>
 
 <script setup lang="ts">
   import { BasicModal, useModalInner } from '@/components/Modal';
-  import { BasicForm, useForm, type FormSchema } from '@/components/Form';
+  import { useForm, type FormSchema } from '@/components/Form';
   import { depSchemas } from './data';
   import { getRole, setDataScope } from '@/api/system/role';
 
