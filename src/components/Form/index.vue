@@ -125,9 +125,10 @@
       return cloneDeep(schemas as FormSchema[]);
     }
   });
+  const isShowAdvancedButton = ref(false);
 
   const getFormActionBindProps = computed((): Recordable => {
-    return { ...getProps, ...advanceState, isShowAdvancedButton: advanceState.collapsed };
+    return { ...getProps, ...advanceState, isShowAdvancedButton: isShowAdvancedButton.value };
   });
 
   const { handleFormValues, initDefault } = useFormValues({
@@ -366,6 +367,7 @@
       len += Number(ele.giProps?.span) || 8;
     });
     advanceState.collapsed = Boolean(len > allcols);
+    isShowAdvancedButton.value = Boolean(len > allcols);
   });
 
   onMounted(() => {
