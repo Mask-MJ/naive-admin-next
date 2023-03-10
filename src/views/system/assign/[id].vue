@@ -1,12 +1,12 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <Table @register="registerTable">
       <template #toolbar>
         <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
         <n-button class="mr-2" type="error" @click="handleDeleteAll"> 批量取消授权 </n-button>
         <n-button class="mr-2" type="warning" @click="handleClose"> 关闭 </n-button>
       </template>
-    </BasicTable>
+    </Table>
     <addUser @register="registerModal" @success="reload()" />
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script setup lang="ts">
   import type { CancelParams } from '@/api/system/types/assign';
 
-  import { BasicTable, useTable } from '@/components/Table';
+  import { useTable } from '@/components/Table';
   import { TableAction } from '@/components/Table';
   import { useModal } from '@/components/Modal';
   import addUser from './modal/addUser.vue';
@@ -63,7 +63,6 @@
           ],
         }),
     },
-    fetchSetting: { listField: 'rows' },
     rowKey: (rowData) => rowData.userId,
   });
 
@@ -81,7 +80,7 @@
         userIds: userIds.join(','),
       };
       await cancelAll(params);
-      reload();
+      await reload();
     }
   };
 

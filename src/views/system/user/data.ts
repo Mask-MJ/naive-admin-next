@@ -1,10 +1,10 @@
 import type { FormSchema } from '@/components/Form';
-import type { DataTableColumns } from 'naive-ui';
-import { NPopconfirm, NSwitch, NButton } from 'naive-ui';
-import { setRoleStatus } from '@/api/system/user';
+import type { BasicColumn } from '@/components/Table';
 import type { AccountList } from '@/api/system/types/user';
 
-export const searchFormSchema: FormSchema[] = [
+import { NPopconfirm, NSwitch } from 'naive-ui';
+import { setRoleStatus } from '@/api/system/user';
+export const schemas: FormSchema[] = [
   {
     path: 'userName',
     label: '用户名称',
@@ -115,30 +115,26 @@ export const searchFormSchema: FormSchema[] = [
   // },
 ];
 
-export const columns: DataTableColumns<AccountList & { pendingStatus: boolean }> = [
+export const columns: BasicColumn<AccountList & { pendingStatus: boolean }>[] = [
   {
     title: '用户名称',
     key: 'userName',
     width: 100,
-    align: 'center',
   },
   {
     title: '用户昵称',
     key: 'nickName',
     width: 100,
-    align: 'center',
   },
   {
     title: '部门',
     key: 'dept.deptName',
     width: 100,
-    align: 'center',
   },
   {
     title: '状态',
     key: 'status',
     width: 100,
-    align: 'center',
     render: (rowData) => {
       return h(
         NPopconfirm,
@@ -188,44 +184,5 @@ export const columns: DataTableColumns<AccountList & { pendingStatus: boolean }>
     title: '创建时间',
     key: 'createTime',
     width: 200,
-    align: 'center',
-  },
-  {
-    title: 'Action',
-    key: 'actions',
-    width: 200,
-    fixed: 'right',
-    render(row) {
-      return h('div', { class: 'flex-between' }, [
-        h(
-          NButton,
-          {
-            strong: true,
-            type: 'primary',
-            secondary: true,
-            size: 'small',
-            onClick() {
-              console.log(row);
-            },
-          },
-          { icon: () => h('i', { class: 'i-ant-design:edit-outlined' }) },
-        ),
-        h(
-          NButton,
-          { strong: true, type: 'success', secondary: true, size: 'small' },
-          { icon: () => h('i', { class: 'i-ant-design:edit-outlined' }) },
-        ),
-        h(
-          NButton,
-          { strong: true, type: 'warning', secondary: true, size: 'small' },
-          { icon: () => h('i', { class: 'i-ant-design:edit-outlined' }) },
-        ),
-        h(
-          NButton,
-          { strong: true, type: 'error', secondary: true, size: 'small' },
-          { icon: () => h('i', { class: 'i-ant-design:edit-outlined' }) },
-        ),
-      ]);
-    },
   },
 ];

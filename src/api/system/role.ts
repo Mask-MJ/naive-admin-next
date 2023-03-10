@@ -5,13 +5,10 @@ enum Api {
   GetRoleList = '/system/role/list',
   GetTreeSelect = '/system/menu/treeselect',
   ControlRole = '/system/role/',
-  SetRoleStatus = '/system/role/changeStatus',
+  // SetRoleStatus = '/system/role/changeStatus',
   RoleMenuTree = '/system/menu/roleMenuTreeselect/',
   RoleDeptTree = '/system/dept/roleDeptTreeselect/',
   AllocatedList = '/system/role/authUser/allocatedList',
-  UnAllocatedList = '/system/role/authUser/unallocatedList',
-  SelectAll = 'system/role/authUser/selectAll',
-  CancelAll = '/system/role/authUser/cancelAll',
   DataScope = '/system/role/dataScope',
 }
 

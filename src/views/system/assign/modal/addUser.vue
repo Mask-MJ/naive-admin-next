@@ -5,13 +5,13 @@
     @register="registerModal"
     @positive-click="handleSubmit"
   >
-    <BasicTable class="h-100" @register="registerTable" />
+    <Table class="h-100" @register="registerTable" />
   </Modal>
 </template>
 
 <script setup lang="ts">
   import { useModalInner } from '@/components/Modal';
-  import { BasicTable, useTable } from '@/components/Table';
+  import { useTable } from '@/components/Table';
   import { getUnAllocatedList, selectUser } from '@/api/system/assign';
   import { columns, schemas } from '../data';
 
@@ -29,7 +29,6 @@
     formConfig: { labelWidth: 100, schemas },
     bordered: true,
     searchInfo: { roleId: roleId.value },
-    fetchSetting: { listField: 'rows' },
     flexHeight: true,
     rowKey: (rowData) => rowData.userId,
   });

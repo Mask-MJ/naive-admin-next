@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+  import type { RoleList } from '@/api/system/types/role';
   import { useTable } from '@/components/Table';
   import { getRoleList, deleteUser } from '@/api/system/role';
   import { columns, schemas } from './data';
@@ -33,7 +34,7 @@
       title: '操作',
       flag: 'ACTION',
       key: 'ACTION',
-      render: (row) =>
+      render: (row: RoleList) =>
         h(TableAction, {
           actions: [
             {
@@ -49,7 +50,7 @@
               icon: 'i-ant-design:user-outlined',
               tooltip: '分配',
               onClick: () => {
-                router.push(`/system/assign/${encodeURIComponent(row.roleId as string)}`);
+                router.push(`/system/assign/${encodeURIComponent(row.roleId)}`);
               },
             },
             {
@@ -68,7 +69,7 @@
                 showIcon: false,
                 positiveButtonProps: { type: 'error' },
                 onPositiveClick: async () => {
-                  await deleteUser(row.roleId as string);
+                  await deleteUser(row.roleId);
                   window.$message.success('删除成功');
                   await reload();
                 },
@@ -77,7 +78,6 @@
           ],
         }),
     },
-    fetchSetting: { listField: 'rows' },
     rowKey: (rowData) => rowData.roleId,
   });
 

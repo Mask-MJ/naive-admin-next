@@ -10,5 +10,5 @@ export interface RoleStatus {
 
 export interface AccountList {
   status: string;
-  userId: number;
+  userId: string;
 }
