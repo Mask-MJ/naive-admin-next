@@ -5,7 +5,7 @@ export type AccountParams = {
 };
 export interface RoleStatus {
   status: string;
-  userId: number;
+  userId: string;
 }
 
 export interface AccountList {

@@ -1,7 +1,11 @@
 import type { BasicColumn } from '@/components/Table';
 import type { FormSchema } from '@/components/Form';
+import type { RoleList } from '@/api/system/types/role';
 
-export const columns: BasicColumn[] = [
+import { NPopconfirm, NSwitch } from 'naive-ui';
+import { setRoleStatus } from '@/api/system/role';
+
+export const columns: BasicColumn<RoleList & { pendingStatus: boolean }>[] = [
   {
     title: '角色名称',
     key: 'roleName',
@@ -26,6 +30,49 @@ export const columns: BasicColumn[] = [
     title: '状态',
     key: 'status',
     width: 100,
+    render: (rowData) =>
+      h(
+        NPopconfirm,
+        {
+          onPositiveClick() {
+            if (!Reflect.has(rowData, 'pendingStatus')) {
+              rowData.pendingStatus = false;
+            }
+            const status = rowData.status === '0' ? '1' : '0';
+            setRoleStatus({ roleId: rowData.roleId, status })
+              .then(() => {
+                rowData.status = status;
+                window.$message.success(`已成功修改用户状态`);
+              })
+              .catch(() => {
+                window.$message.error('修改用户状态失败');
+              })
+              .finally(() => {
+                rowData.pendingStatus = false;
+              });
+          },
+          onNegativeClick() {
+            rowData.pendingStatus = false;
+          },
+        },
+        {
+          default: () => (rowData.status === '0' ? '是否停用用户' : '是否启用用户'),
+          trigger: () =>
+            h(
+              NSwitch,
+              {
+                checkedValue: '0',
+                uncheckedValue: '1',
+                loading: rowData.pendingStatus,
+                value: rowData.status,
+                onUpdateValue() {
+                  rowData.pendingStatus = true;
+                },
+              },
+              { checked: () => '启用', unchecked: () => '停用' },
+            ),
+        },
+      ),
   },
   {
     title: '创建时间',

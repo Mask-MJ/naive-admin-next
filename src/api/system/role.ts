@@ -1,11 +1,17 @@
-import type { RoleParams, RoleList, SetRoleParams, ScopeParams } from '@/api/system/types/role';
+import type {
+  RoleParams,
+  RoleList,
+  SetRoleParams,
+  ScopeParams,
+  SetRoleStatusParams,
+} from '@/api/system/types/role';
 import { defHttp } from '@/utils/axios';
 
 enum Api {
   GetRoleList = '/system/role/list',
   GetTreeSelect = '/system/menu/treeselect',
   ControlRole = '/system/role/',
-  // SetRoleStatus = '/system/role/changeStatus',
+  SetRoleStatus = '/system/role/changeStatus',
   RoleMenuTree = '/system/menu/roleMenuTreeselect/',
   RoleDeptTree = '/system/dept/roleDeptTreeselect/',
   AllocatedList = '/system/role/authUser/allocatedList',
@@ -31,3 +37,6 @@ export const setDataScope = (params: ScopeParams) => defHttp.put({ url: Api.Data
 export const getRoleDeptTree = ({ id }) => defHttp.get({ url: Api.RoleDeptTree + id });
 // 删除对应的用户
 export const deleteUser = (params: string) => defHttp.delete({ url: Api.ControlRole + params });
+// 修改用户对应的状态
+export const setRoleStatus = (params: SetRoleStatusParams) =>
+  defHttp.put({ url: Api.SetRoleStatus, params });

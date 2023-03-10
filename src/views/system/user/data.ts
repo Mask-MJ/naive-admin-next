@@ -135,8 +135,8 @@ export const columns: BasicColumn<AccountList & { pendingStatus: boolean }>[] = 
     title: '状态',
     key: 'status',
     width: 100,
-    render: (rowData) => {
-      return h(
+    render: (rowData) =>
+      h(
         NPopconfirm,
         {
           onPositiveClick() {
@@ -177,8 +177,7 @@ export const columns: BasicColumn<AccountList & { pendingStatus: boolean }>[] = 
               { checked: () => '启用', unchecked: () => '停用' },
             ),
         },
-      );
-    },
+      ),
   },
   {
     title: '创建时间',

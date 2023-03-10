@@ -12,10 +12,9 @@
 
 <script setup lang="ts">
   import type { RoleList } from '@/api/system/types/role';
-  import { useTable } from '@/components/Table';
+  import { useTable, TableAction } from '@/components/Table';
   import { getRoleList, deleteUser } from '@/api/system/role';
   import { columns, schemas } from './data';
-  import { TableAction } from '@/components/Table';
   import { useModal } from '@/components/Modal';
   import setModal from './modal/setModal.vue';
   import depModal from './modal/depModal.vue';
