@@ -11,6 +11,8 @@ export const basicProps = {
   // 用于将表单内时间区域的应设成 2 个字段
   pathMapToTime: { type: Array as PropType<PathMapToTime>, default: () => [] },
   submitOnReset: { type: Boolean, default: false },
+  // 是否开启自动折叠
+  isAutoCollapsed: { type: Boolean, default: false },
   // 超过 3 行自动折叠
   autoAdvancedLine: { type: Number, default: 3 },
   autoSetPlaceHolder: { type: Boolean, default: true },
@@ -52,7 +54,10 @@ export const basicProps = {
   // 整个表单通用 wrapperGridItem 配置
   wrapperGridItem: Object as PropType<Partial<GridProps>>,
   // 整个表单通用 Grid 配置
-  gridProps: { type: Object as PropType<GridProps>, default: () => ({}) },
+  gridProps: {
+    type: Object as PropType<GridProps>,
+    default: () => ({}),
+  },
   labelPlacement: { type: String as PropType<LabelPlacement>, default: 'left' },
   tableAction: { type: Object as PropType<TableActionType> },
 };

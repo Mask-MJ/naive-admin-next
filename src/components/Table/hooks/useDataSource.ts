@@ -192,7 +192,6 @@ export function useDataSource(
 
       let resultItems: Recordable[] = isArrayResult ? res : get(res, listField);
       const resultPageCount: number = isArrayResult ? res.length : get(res, totalField);
-
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
       if (Number(resultPageCount)) {
         const pageTotal = Math.ceil(resultPageCount / pageSize);

@@ -7,6 +7,7 @@
         submitOnReset
         v-bind="getFormProps"
         :showActionButtonGroup="true"
+        :isAutoCollapsed="true"
         v-if="getBindValues.useSearchForm"
         :tableAction="tableAction"
         @register="registerForm"

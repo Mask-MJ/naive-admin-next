@@ -3,7 +3,7 @@
     <n-grid v-bind="getGrid">
       <template v-for="schema in getSchema" :key="schema.path">
         <n-form-item-gi
-          v-if="getShow(schema)"
+          v-show="getShow(schema).isShow"
           :label="schema.label"
           :path="schema.path"
           :span="getGridItem(schema.giProps?.span)"
@@ -91,7 +91,7 @@
   const propsRef = ref<Partial<BasicFormProps>>({});
   // 展开缩起配置
   const advanceState = reactive<{ collapsed: Boolean; collapsedRows: Number }>({
-    collapsed: true, // 是否折叠
+    collapsed: false, // 是否折叠
     collapsedRows: 2, // 折叠后的行数
   });
 
@@ -106,6 +106,7 @@
     const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
     for (const schema of schemas) {
       const { defaultValue, component } = schema;
+
       // 处理时间相关组件的默认值
       if (defaultValue && ['NDatePicker', 'NTimePicker'].includes(component)) {
         if (!Array.isArray(defaultValue)) {
@@ -120,9 +121,14 @@
       }
     }
     if (unref(getProps).showAdvancedButton) {
-      return cloneDeep(schemas.filter((schema) => schema.component !== 'NDivider') as FormSchema[]);
+      return cloneDeep(
+        schemas.filter((schema) => {
+          const isIfShow = getShow(schema).isIfShow;
+          return schema.component !== 'NDivider' && isIfShow;
+        }),
+      );
     } else {
-      return cloneDeep(schemas as FormSchema[]);
+      return cloneDeep(schemas.filter((schema) => getShow(schema).isIfShow));
     }
   });
   const isShowAdvancedButton = ref(false);
@@ -188,7 +194,7 @@
     validate,
   };
 
-  const getShow = (schema: FormSchema): boolean => {
+  const getShow = (schema: FormSchema): { isShow: boolean; isIfShow: boolean } => {
     const getValues = computed(() => ({
       path: schema.path,
       model: formModel,
@@ -199,15 +205,24 @@
       } as Recordable,
       schema: schema,
     }));
-    const { ifShow } = schema;
+    const { show, ifShow } = schema;
+
+    let isShow = true;
     let isIfShow = true;
+
+    if (isBoolean(show)) {
+      isShow = show;
+    }
     if (isBoolean(ifShow)) {
       isIfShow = ifShow;
+    }
+    if (isFunction(show)) {
+      isShow = show(unref(getValues));
     }
     if (isFunction(ifShow)) {
       isIfShow = ifShow(unref(getValues));
     }
-    return isIfShow;
+    return { isShow, isIfShow };
   };
 
   const handleRule = (schema: FormSchema): FormItemRule[] => {
@@ -292,6 +307,10 @@
 
     if (requiredRuleIndex !== -1) {
       const rule = rules[requiredRuleIndex];
+      const { isShow } = getShow(schema);
+      if (!isShow) {
+        rule.required = false;
+      }
       if (component) {
         if (!Reflect.has(rule, 'type')) {
           rule.type = component === 'NInputNumber' ? 'number' : 'string';
@@ -360,14 +379,18 @@
 
   // 监听 schema 当折叠生效或者当 行数超过 props.autoAdvancedLine 行时, 显示折叠按钮
   watchEffect(() => {
-    // 获取所有的 form-item 的 span 加起来是否大于 (form 的 span(默认24) * 3 + 操作栏的 span (默认8) )
-    const allcols = (Number(props.gridProps.cols) || 24) * props.autoAdvancedLine;
-    let len = Number(props.actionGiOptions.span);
-    getSchema.value.forEach((ele) => {
-      len += Number(ele.giProps?.span) || 8;
-    });
-    advanceState.collapsed = Boolean(len > allcols);
-    isShowAdvancedButton.value = Boolean(len > allcols);
+    if (props.isAutoCollapsed) {
+      // 获取所有的 form-item 的 span 加起来是否大于 (form 的 span(默认24) * 3 + 操作栏的 span (默认8) )
+      const allcols = (Number(props.gridProps.cols) || 24) * props.autoAdvancedLine;
+      let len = Number(props.actionGiOptions.span);
+      getSchema.value.forEach((ele) => {
+        len += Number(ele.giProps?.span) || 8;
+      });
+      advanceState.collapsed = Boolean(len > allcols);
+      isShowAdvancedButton.value = Boolean(len > allcols);
+    } else {
+      advanceState.collapsed = false;
+    }
   });
 
   onMounted(() => {

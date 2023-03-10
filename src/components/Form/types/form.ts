@@ -30,6 +30,7 @@ export type FormSchema = ComponentMap &
     changeEvent?: string; // 表单更新事件名称
     giProps?: Partial<GridItemProps>;
     defaultValue?: any; // 所渲渲染组件的初始值
+    show?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
     ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否显示，js 控制，会删除 dom
     render?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件
     renderGiContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string; // 自定义渲染组件（需要自行包含 formItem）
@@ -52,6 +53,7 @@ export interface BasicFormProps extends FormProps {
   labelAlign?: LabelAlign;
   labelGridItem?: Partial<GridItemProps>; // 整个表单通用 labelGridItem 配置
   wrapperGridItem?: Partial<GridItemProps>; // 整个表单通用 wrapperGridItem 配置
+  isAutoCollapsed: Boolean; // 是否开启自动折叠
   autoAdvancedLine: Number; // 超过 x 行自动折叠
   /** Form 布局配置 */
 
