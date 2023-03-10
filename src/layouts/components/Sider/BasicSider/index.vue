@@ -1,11 +1,11 @@
 <template>
-  <dark-mode-container class="flex-col items-stretch h-full" :inverted="theme.sider.inverted">
+  <dark-mode-container class="flex flex-col items-stretch h-full" :inverted="theme.sider.inverted">
     <logo
       v-if="!isHorizontalMix"
       :show-title="showTitle"
       :style="{ height: theme.header.height + 'px' }"
     />
-    <basic-menu />
+    <basic-menu class="flex-1 overflow-hidden" />
   </dark-mode-container>
 </template>
 

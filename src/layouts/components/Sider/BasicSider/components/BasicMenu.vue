@@ -1,5 +1,5 @@
 <template>
-  <n-scrollbar class="flex-1 overflow-hidden">
+  <n-scrollbar>
     <n-menu
       :value="activeKey"
       :collapsed="app.siderCollapse"
