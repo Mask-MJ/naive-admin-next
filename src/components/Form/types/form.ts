@@ -55,6 +55,7 @@ export interface BasicFormProps extends FormProps {
   wrapperGridItem?: Partial<GridItemProps>; // 整个表单通用 wrapperGridItem 配置
   isAutoCollapsed: Boolean; // 是否开启自动折叠
   autoAdvancedLine: Number; // 超过 x 行自动折叠
+  autoSubmitOnEnter: Boolean; // 回车提交
   /** Form 布局配置 */
 
   name?: string;

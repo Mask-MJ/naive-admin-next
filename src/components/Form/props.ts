@@ -11,6 +11,8 @@ export const basicProps = {
   // 用于将表单内时间区域的应设成 2 个字段
   pathMapToTime: { type: Array as PropType<PathMapToTime>, default: () => [] },
   submitOnReset: { type: Boolean, default: false },
+  // 回车自动提交
+  autoSubmitOnEnter: { type: Boolean, default: true },
   // 是否开启自动折叠
   isAutoCollapsed: { type: Boolean, default: false },
   // 超过 3 行自动折叠

@@ -1,5 +1,10 @@
 <template>
-  <n-form ref="formElRef" v-bind="getBindValue" :model="formModel">
+  <n-form
+    ref="formElRef"
+    v-bind="getBindValue"
+    :model="formModel"
+    @keypress.enter="handleEnterPress"
+  >
     <n-grid v-bind="getGrid">
       <template v-for="schema in getSchema" :key="schema.path">
         <n-form-item-gi
@@ -178,6 +183,17 @@
       return;
     }
     emits('path-value-change', key, value);
+  };
+
+  const handleEnterPress = (e: KeyboardEvent) => {
+    const { autoSubmitOnEnter } = unref(getProps);
+    if (!autoSubmitOnEnter) return;
+    if (e.key === 'Enter' && e.target && e.target instanceof HTMLElement) {
+      const target: HTMLElement = e.target as HTMLElement;
+      if (target && target.tagName && target.tagName.toUpperCase() == 'INPUT') {
+        handleSubmit();
+      }
+    }
   };
 
   const formActionType: FormActionType = {
