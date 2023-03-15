@@ -52,12 +52,12 @@ export function useModal(): UseModalReturnType {
       getInstance()?.setModalProps(props);
     },
 
-    openModal: <T = any>(show = true, data?: T, openOnSet = true): void => {
+    openModal: <T = any>(show = true, data = {} as T, openOnSet = true): void => {
       getInstance()?.setModalProps({
         show: show,
       });
 
-      if (!data) return;
+      // if (!data) return;
       const id = unref(uid);
       if (openOnSet) {
         dataTransfer[id] = null;

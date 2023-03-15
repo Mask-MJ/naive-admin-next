@@ -18,8 +18,8 @@
   });
 
   const [registerModal, { closeModal, setModalProps }] = useModalInner(async (data) => {
-    setModalProps({ title: data ? '修改角色' : '新增角色' });
-    if (data) {
+    setModalProps({ title: data.roleId ? '修改角色' : '新增角色' });
+    if (data.roleId) {
       roleId.value = data.roleId;
       const result = await getRole(data.roleId);
       const treeData = await getRoleMenuTree(data.roleId);

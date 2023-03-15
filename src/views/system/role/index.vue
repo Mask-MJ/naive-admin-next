@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <Table @register="registerTable">
-      <template #toolbar>
-        <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
-      </template>
-    </Table>
-    <setModal @register="registerSetModal" @success="reload()" />
-    <depModal @register="registerDepModal" @success="reload()" />
-  </div>
+  <Table @register="registerTable">
+    <template #toolbar>
+      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
+    </template>
+  </Table>
+  <setModal @register="registerSetModal" @success="reload()" />
+  <depModal @register="registerDepModal" @success="reload()" />
 </template>
 
 <script setup lang="ts">

@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <Form @register="registerForm" />
-    <Table @register="registerTable">
-      <template #toolbar>
-        <n-button type="primary" class="mr-2" @click="handleSubmit">提交</n-button>
-        <n-button type="error" @click="handleClose">关闭</n-button>
-      </template>
-    </Table>
-  </div>
+  <Form @register="registerForm" />
+  <Table @register="registerTable">
+    <template #toolbar>
+      <n-button type="primary" class="mr-2" @click="handleSubmit">提交</n-button>
+      <n-button type="error" @click="handleClose">关闭</n-button>
+    </template>
+  </Table>
 </template>
 
 <script setup lang="ts">

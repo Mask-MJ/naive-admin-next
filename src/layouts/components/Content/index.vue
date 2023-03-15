@@ -2,7 +2,9 @@
   <router-view v-slot="{ Component, route }">
     <transition :name="theme.pageAnimateMode" mode="out-in" :appear="true">
       <keep-alive :include="tabStore.getCacheTabList">
-        <component :is="Component" v-if="app.reloadFlag" :key="route.fullPath" />
+        <div :key="route.fullPath">
+          <component :is="Component" v-if="app.reloadFlag" />
+        </div>
       </keep-alive>
     </transition>
   </router-view>

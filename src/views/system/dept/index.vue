@@ -1,34 +1,35 @@
 <template>
   <Table @register="registerTable">
     <template #toolbar>
-      <n-button type="primary" @click="handleAdd"> 新增 </n-button>
+      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增部门 </n-button>
     </template>
   </Table>
-  <setModal @register="registerSetModal" @success="reload()" />
+  <setModal @register="registerModal" @success="reload()" />
 </template>
 
 <script setup lang="ts">
-  import type { PostList } from '@/api/system/types/post';
-
-  import { useTable, TableAction } from '@/components/Table';
+  import type { DeptList } from '@/api/system/types/dept';
   import { useModal } from '@/components/Modal';
+  import { TableAction, useTable } from '@/components/Table';
+  import { getDeptList, deleteDept } from '@/api/system/dept';
   import { columns, schemas } from './data';
-  import { getPostList, deletePost } from '@/api/system/post';
   import setModal from './modal/setModal.vue';
 
-  const [registerSetModal, { openModal }] = useModal();
+  const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({
-    api: getPostList,
+    api: getDeptList,
     columns,
     useSearchForm: true,
     formConfig: { labelWidth: 100, schemas },
-    rowKey: (rowData) => rowData.roleId,
+    bordered: true,
+    fetchSetting: { listField: 'data' },
+    showIndexColumn: false,
     actionColumn: {
-      width: 200,
+      width: 150,
       title: '操作',
       flag: 'ACTION',
       key: 'ACTION',
-      render: (row: PostList) =>
+      render: (row: DeptList) =>
         h(TableAction, {
           actions: [
             {
@@ -36,7 +37,7 @@
               icon: 'i-ant-design:form-outlined',
               tooltip: '编辑',
               onClick: () => {
-                openModal(true, { postId: row.postId });
+                openModal(true, { deptId: row.deptId });
               },
             },
             {
@@ -47,7 +48,7 @@
                 showIcon: false,
                 positiveButtonProps: { type: 'error' },
                 onPositiveClick: async () => {
-                  await deletePost(row.postId);
+                  await deleteDept(row.deptId);
                   window.$message.success('删除成功');
                   await reload();
                 },
@@ -56,8 +57,8 @@
           ],
         }),
     },
+    rowKey: (rowData) => rowData.deptId,
   });
-
   const handleAdd = () => {
     openModal(true);
   };

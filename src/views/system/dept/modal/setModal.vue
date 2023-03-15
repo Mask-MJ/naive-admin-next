@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
   import { useModalInner } from '@/components/Modal';
-  import { useForm } from '@/components/Form';
-  import { getPost, addPost, setPost } from '@/api/system/post';
   import { schemas } from './data';
+  import { useForm } from '@/components/Form';
+  import { getDept, setDept, addDept } from '@/api/system/dept';
 
   const emits = defineEmits(['success', 'register']);
   const [registerForm, { validate, getPathsValue, setPathsValue }] = useForm({
@@ -17,21 +17,20 @@
   });
 
   const [registerModal, { closeModal, setModalProps }] = useModalInner(async (data) => {
-    setModalProps({ title: data.postId ? '修改岗位' : '新增岗位' });
-    if (data.postId) {
-      const result = await getPost(data.postId);
+    setModalProps({ title: data.deptId ? '修改部门' : '新增部门' });
+    if (data.deptId) {
+      const result = await getDept(data.deptId);
       await setPathsValue(result);
     }
   });
+
   const handleSubmit = async () => {
     try {
       await validate();
       const result = getPathsValue();
-      await (result.postId ? setPost(result) : addPost(result));
+      await (result.postId ? setDept(result) : await addDept(result));
       emits('success');
       closeModal();
     } catch (error) {}
   };
 </script>
-
-<style scoped></style>
