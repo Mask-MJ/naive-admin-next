@@ -19,6 +19,7 @@ import {
   NDivider,
 } from 'naive-ui';
 import ApiTree from './components/ApiTree.vue';
+import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
@@ -30,6 +31,7 @@ componentMap.set('NSelect', NSelect);
 componentMap.set('NTreeSelect', NTreeSelect);
 componentMap.set('NTree', NTree);
 componentMap.set('ApiTree', ApiTree);
+componentMap.set('ApiTreeSelect', ApiTreeSelect);
 componentMap.set('NSwitch', NSwitch);
 componentMap.set('NRadioGroup', RadioGroup);
 componentMap.set('NCheckbox', NCheckbox);

@@ -56,6 +56,16 @@ interface ApiTree {
   };
 }
 
+interface ApiTreeSelect {
+  component: 'ApiTreeSelect';
+  componentProps?: TreeSelectProps & {
+    api: any;
+    params?: any;
+    immediate?: boolean;
+    resultField?: string;
+  };
+}
+
 interface NRadioGroup {
   component: 'NRadioGroup';
   componentProps?: RadioGroupProps & {
@@ -120,6 +130,7 @@ export type ComponentMap =
   | NTreeSelect
   | NTree
   | ApiTree
+  | ApiTreeSelect
   | NRadioGroup
   | NCheckbox
   | NCheckboxGroup

@@ -8,6 +8,7 @@ export {};
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ApiTree: typeof import('./../src/components/Form/components/ApiTree.vue')['default'];
+    ApiTreeSelect: typeof import('./../src/components/Form/components/ApiTreeSelect.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
@@ -57,6 +58,7 @@ declare module '@vue/runtime-core' {
     NTabs: typeof import('naive-ui')['NTabs'];
     NTooltip: typeof import('naive-ui')['NTooltip'];
     NTree: typeof import('naive-ui')['NTree'];
+    NTreeSelect: typeof import('naive-ui')['NTreeSelect'];
     RadioGroup: typeof import('./../src/components/Form/components/RadioGroup.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
