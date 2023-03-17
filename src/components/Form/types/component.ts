@@ -38,6 +38,18 @@ interface NTreeSelect {
   componentProps?: TreeSelectProps;
 }
 
+interface ApiSelect {
+  component: 'ApiSelect';
+  componentProps?: SelectProps & {
+    api: any;
+    params?: any;
+    immediate?: boolean;
+    resultField?: string;
+    isScroll?: boolean;
+    allOptions?: boolean;
+  };
+}
+
 interface NTree {
   component: 'NTree';
   componentProps?: TreeProps;
@@ -127,6 +139,7 @@ export type ComponentMap =
   | NInput
   | NInputNumber
   | NSelect
+  | ApiSelect
   | NTreeSelect
   | NTree
   | ApiTree

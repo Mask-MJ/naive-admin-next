@@ -20,6 +20,7 @@ import {
 } from 'naive-ui';
 import ApiTree from './components/ApiTree.vue';
 import ApiTreeSelect from './components/ApiTreeSelect.vue';
+import ApiSelect from './components/ApiSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
@@ -28,6 +29,7 @@ componentMap.set('NInput', NInput);
 componentMap.set('NInputNumber', NInputNumber);
 componentMap.set('NAutoComplete', NAutoComplete);
 componentMap.set('NSelect', NSelect);
+componentMap.set('ApiSelect', ApiSelect);
 componentMap.set('NTreeSelect', NTreeSelect);
 componentMap.set('NTree', NTree);
 componentMap.set('ApiTree', ApiTree);
