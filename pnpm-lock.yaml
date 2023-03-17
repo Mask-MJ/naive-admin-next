@@ -20,6 +20,7 @@ specifiers:
   '@vueuse/head': ^1.0.25
   colord: ^2.9.3
   commitizen: ^4.3.0
+  cropperjs: ^1.5.13
   dayjs: ^1.11.7
   eslint: ^8.34.0
   eslint-config-prettier: ^8.6.0
@@ -56,6 +57,7 @@ specifiers:
   vue-tsc: ^1.0.24
 
 dependencies:
+  cropperjs: 1.5.13
   dayjs: 1.11.7
   lodash-es: 4.17.21
   naive-ui: 2.34.3_vue@3.2.47
@@ -3619,6 +3621,13 @@ packages:
         integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==,
       }
     dev: true
+
+  /cropperjs/1.5.13:
+    resolution:
+      {
+        integrity: sha512-by7jKAo73y5/Do0K6sxdTKHgndY0NMjG2bEdgeJxycbcmHuCiMXqw8sxy5C5Y5WTOTcDGmbT7Sr5CgKOXR06OA==,
+      }
+    dev: false
 
   /cross-spawn/7.0.3:
     resolution:

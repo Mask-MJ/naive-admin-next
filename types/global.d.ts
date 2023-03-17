@@ -3,6 +3,7 @@ declare type Nullable<T> = T | null;
 declare type Recordable<T = any> = Record<string, T>;
 declare type TimeoutHandle = ReturnType<typeof setTimeout>;
 declare type EmitType = (event: string, ...args: any[]) => void;
+declare type TargetContext = '_self' | '_blank';
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R;
 }

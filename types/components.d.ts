@@ -7,8 +7,12 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ApiSelect: typeof import('./../src/components/Form/components/ApiSelect.vue')['default'];
     ApiTree: typeof import('./../src/components/Form/components/ApiTree.vue')['default'];
     ApiTreeSelect: typeof import('./../src/components/Form/components/ApiTreeSelect.vue')['default'];
+    CopperModal: typeof import('./../src/components/Cropper/src/CopperModal.vue')['default'];
+    Cropper: typeof import('./../src/components/Cropper/src/Cropper.vue')['default'];
+    CropperAvatar: typeof import('./../src/components/Cropper/src/CropperAvatar.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
@@ -30,6 +34,7 @@ declare module '@vue/runtime-core' {
     NDropdown: typeof import('naive-ui')['NDropdown'];
     NForm: typeof import('naive-ui')['NForm'];
     NFormItemGi: typeof import('naive-ui')['NFormItemGi'];
+    NGi: typeof import('naive-ui')['NGi'];
     NGradientText: typeof import('naive-ui')['NGradientText'];
     NGrid: typeof import('naive-ui')['NGrid'];
     NGridItem: typeof import('naive-ui')['NGridItem'];
@@ -59,6 +64,8 @@ declare module '@vue/runtime-core' {
     NTooltip: typeof import('naive-ui')['NTooltip'];
     NTree: typeof import('naive-ui')['NTree'];
     NTreeSelect: typeof import('naive-ui')['NTreeSelect'];
+    NUpload: typeof import('naive-ui')['NUpload'];
+    NUploadTrigger: typeof import('naive-ui')['NUploadTrigger'];
     RadioGroup: typeof import('./../src/components/Form/components/RadioGroup.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
