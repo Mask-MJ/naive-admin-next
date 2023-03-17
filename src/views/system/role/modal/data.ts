@@ -57,7 +57,7 @@ export const setSchemas: FormSchema[] = [
     component: 'NInput',
     label: '备注',
     defaultValue: '',
-    componentProps: { placeholder: '请输入内容' },
+    componentProps: { type: 'textarea', placeholder: '请输入内容' },
   },
 ];
 

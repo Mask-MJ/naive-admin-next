@@ -43,6 +43,6 @@ export const schemas: FormSchema[] = [
     path: 'remark',
     component: 'NInput',
     label: '备注',
-    componentProps: { placeholder: '请输入内容' },
+    componentProps: { type: 'textarea', placeholder: '请输入内容' },
   },
 ];

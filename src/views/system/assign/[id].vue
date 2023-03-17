@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <Table @register="registerTable">
-      <template #toolbar>
-        <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
-        <n-button class="mr-2" type="error" @click="handleDeleteAll"> 批量取消授权 </n-button>
-        <n-button class="mr-2" type="warning" @click="handleClose"> 关闭 </n-button>
-      </template>
-    </Table>
-    <addUser @register="registerModal" @success="reload()" />
-  </div>
+  <Table @register="registerTable">
+    <template #toolbar>
+      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
+      <n-button class="mr-2" type="error" @click="handleDeleteAll"> 批量取消授权 </n-button>
+      <n-button class="mr-2" type="warning" @click="handleClose"> 关闭 </n-button>
+    </template>
+  </Table>
+  <addUser @register="registerModal" @success="reload()" />
 </template>
 
 <script setup lang="ts">

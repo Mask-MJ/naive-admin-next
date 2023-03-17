@@ -132,6 +132,7 @@ export const schemas: FormSchema[] = [
     path: 'remark',
     label: '备注',
     component: 'NInput',
+    componentProps: { type: 'textarea', placeholder: '请输入内容' },
     giProps: { span: 24 },
   },
 ];
