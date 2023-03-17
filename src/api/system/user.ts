@@ -1,6 +1,10 @@
 import type { AccountParams, RoleStatus, AccountList } from './types/user';
+import type { UploadFileParams } from '@/utils/axios/types';
 
 import { defHttp } from '@/utils/axios';
+import { getAppEnvConfig } from '@/utils/env';
+
+const { VITE_GLOB_UPLOAD_URL } = getAppEnvConfig();
 
 enum Api {
   List = '/system/user/list',
@@ -9,7 +13,7 @@ enum Api {
   User = '/system/user/',
   ResetPwd = '/system/user/resetPwd',
   AuthRole = '/system/user/authRole/',
-  // UploadAvatar = '/system/user/profile/avatar',
+  UploadAvatar = '/system/user/profile/avatar',
   // Profile = '/system/user/profile',
   // UpdatePwd = '/system/user/profile/updatePwd',
 }
@@ -37,3 +41,10 @@ export const resetPwd = (params) => defHttp.put({ url: Api.ResetPwd, params });
 export const getAuthRole = (params) => defHttp.get({ url: Api.AuthRole + params.userId });
 // 提交分配角色
 export const setAutoRole = (params: string) => defHttp.put({ url: Api.AuthRole + params });
+// 上传头像
+export const uploadAvatar = (params: UploadFileParams) =>
+  defHttp.uploadFile(
+    { url: VITE_GLOB_UPLOAD_URL + Api.UploadAvatar },
+    { name: 'avatarfile', file: params.file },
+  );
+// export const uploadAvatar = VITE_GLOB_UPLOAD_URL + Api.UploadAvatar;
