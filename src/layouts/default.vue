@@ -17,7 +17,7 @@
         <LayoutTabs />
       </n-layout-header>
       <n-layout-content
-        class="bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out p-16px"
+        class="bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out"
         content-style="height: 100%"
         :native-scrollbar="false"
       >
