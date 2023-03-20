@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
     HoverContainer: typeof import('./../src/components/common/HoverContainer.vue')['default'];
+    IconPicker: typeof import('./../src/components/Form/components/IconPicker.vue')['default'];
     Modal: typeof import('./../src/components/Modal/index.vue')['default'];
     NaiveProvider: typeof import('./../src/components/common/NaiveProvider.vue')['default'];
     NAvatar: typeof import('naive-ui')['NAvatar'];
@@ -52,8 +53,11 @@ declare module '@vue/runtime-core' {
     NMessageProvider: typeof import('naive-ui')['NMessageProvider'];
     NModal: typeof import('naive-ui')['NModal'];
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider'];
+    NPagination: typeof import('naive-ui')['NPagination'];
     NPopconfirm: typeof import('naive-ui')['NPopconfirm'];
+    NPopover: typeof import('naive-ui')['NPopover'];
     NRadio: typeof import('naive-ui')['NRadio'];
+    NRadioButton: typeof import('naive-ui')['NRadioButton'];
     NRadioGroup: typeof import('naive-ui')['NRadioGroup'];
     NScrollbar: typeof import('naive-ui')['NScrollbar'];
     NSelect: typeof import('naive-ui')['NSelect'];
