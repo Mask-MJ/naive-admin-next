@@ -45,6 +45,7 @@ components:
     inputText: 'input'
     chooseText: 'choose'
     maxTip: 'The number of characters should be less than {0}'
+    iconPlaceholder: 'Click the select icon'
   table:
     index: 'index'
     settingDens: 'Density'

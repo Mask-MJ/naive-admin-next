@@ -23,6 +23,11 @@ interface NInput {
   componentProps?: InputProps;
 }
 
+interface NIconPicker {
+  component: 'NIconPicker';
+  componentProps?: InputProps;
+}
+
 interface NInputNumber {
   component: 'NInputNumber';
   componentProps?: InputNumberProps;
@@ -81,6 +86,7 @@ interface ApiTreeSelect {
 interface NRadioGroup {
   component: 'NRadioGroup';
   componentProps?: RadioGroupProps & {
+    type?: String;
     options: OptionsItem[];
   };
 }
@@ -140,6 +146,7 @@ export type ComponentMap =
   | NInputNumber
   | NSelect
   | ApiSelect
+  | NIconPicker
   | NTreeSelect
   | NTree
   | ApiTree

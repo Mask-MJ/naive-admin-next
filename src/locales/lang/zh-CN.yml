@@ -45,6 +45,7 @@ components:
     inputText: '请输入'
     chooseText: '请选择'
     maxTip: '字符数应小于{0}位'
+    iconPlaceholder: '点击选择图标'
   table:
     index: '序号'
     settingDens: '密度'

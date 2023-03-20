@@ -1,6 +1,14 @@
 <template>
   <n-radio-group v-bind="getAttrs">
-    <n-space>
+    <template v-if="type === 'Button'">
+      <n-radio-button
+        v-for="item in getOptions"
+        :key="`${item.value}`"
+        :label="item.label"
+        :value="item.value"
+      />
+    </template>
+    <n-space v-else>
       <n-radio
         v-for="item in getOptions"
         :key="`${item.value}`"
@@ -18,6 +26,7 @@
 
   const attrs = useAttrs();
   const props = defineProps({
+    type: { type: String, default: '' },
     options: { type: Array, default: () => {} },
   });
 

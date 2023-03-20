@@ -22,6 +22,7 @@ import ApiTree from './components/ApiTree.vue';
 import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import ApiSelect from './components/ApiSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
+import IconPicker from './components/IconPicker.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
 
@@ -41,6 +42,7 @@ componentMap.set('NCheckboxGroup', NCheckboxGroup);
 componentMap.set('NCascader', NCascader);
 componentMap.set('NSlider', NSlider);
 componentMap.set('NRate', NRate);
+componentMap.set('NIconPicker', IconPicker);
 componentMap.set('NDatePicker', NDatePicker);
 componentMap.set('NTimePicker', NTimePicker);
 componentMap.set('NDivider', NDivider);
