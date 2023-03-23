@@ -18,7 +18,6 @@
   });
   const [registerModal, { closeModal }] = useModalInner(async (data) => {
     roleId.value = data.roleId;
-    console.log(data.roleId);
     await updateSchema({
       path: 'deptIds',
       component: 'ApiTree',

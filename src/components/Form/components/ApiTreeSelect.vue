@@ -23,7 +23,6 @@
   const getAttrs = computed(() => {
     return { ...(props.api ? { options: treeData.value } : {}), ...attrs };
   });
-  console.log(getAttrs);
 
   function handleChange(...args) {
     emits('update:value', ...args);
@@ -62,9 +61,7 @@
     if (!isArray(result)) {
       result = get(result, props.resultField);
     }
-    console.log(result);
     treeData.value = result || [];
-    console.log(treeData);
     isFirstLoaded.value = true;
     emits('options-change', treeData.value);
   }

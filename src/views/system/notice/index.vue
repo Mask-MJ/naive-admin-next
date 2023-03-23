@@ -66,7 +66,6 @@
 
   const handleDelete = async () => {
     const keys = getSelectRowKeys().join(',');
-    console.log(keys);
     window.$dialog.warning({
       title: '系统提示',
       content: `是否确认删除公告编号为 ${keys} 的数据项?`,

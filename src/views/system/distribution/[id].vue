@@ -27,7 +27,6 @@
     labelWidth: 100,
     schemas,
   });
-  console.log(props.id);
   const [registerTable, { getRawDataSource, setSelectedRowKeys, getSelectRowKeys }] = useTable({
     api: getAuthRole,
     columns,

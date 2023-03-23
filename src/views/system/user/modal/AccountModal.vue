@@ -35,7 +35,6 @@
     try {
       await validate();
       const result = getPathsValue();
-      console.log(result);
       result.userId ? await setUserInfo({ ...result }) : await addUserInfo(result);
       emits('success');
       closeModal();

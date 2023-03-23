@@ -56,7 +56,6 @@
 
   onMounted(async () => {
     userInfo = await getProfile();
-    console.log(userInfo);
     setPathsValue(userInfo);
   });
 </script>

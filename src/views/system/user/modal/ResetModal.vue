@@ -22,7 +22,6 @@
     try {
       await validate();
       const result = getPathsValue();
-      console.log(result);
       await resetPwd(result);
       window.$message.success(`修改成功，新密码是：${result.password}`);
       closeModal();
