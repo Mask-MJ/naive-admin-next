@@ -10,6 +10,7 @@
         <n-form-item-gi
           v-show="getShow(schema).isShow"
           :label="schema.label"
+          :labelWidth="schema.labelWidth"
           :path="schema.path"
           :span="getGridItem(schema.giProps?.span)"
           :rule="handleRule(schema)"
@@ -25,7 +26,7 @@
           </template>
           <FormItem
             v-else
-            :value="formModel[schema.path]"
+            :[getValueName(schema.component)]="formModel[schema.path]"
             :formModel="formModel"
             :formProps="getProps"
             :schema="schema"
@@ -60,6 +61,7 @@
 
 <script setup lang="ts">
   import type { FormItemRule } from 'naive-ui';
+  import type { ComponentType } from './types/component';
   import type { BasicFormProps, FormSchema, FormActionType } from './types/form';
 
   import { isArray, isFunction, merge, cloneDeep, isNull, isBoolean } from 'lodash';
@@ -98,6 +100,14 @@
   const advanceState = reactive<{ collapsed: Boolean; collapsedRows: Number }>({
     collapsed: false, // 是否折叠
     collapsedRows: 2, // 折叠后的行数
+  });
+
+  const getValueName = computed(() => (component: ComponentType) => {
+    if (component === 'NDatePicker') {
+      return 'formatted-value';
+    } else {
+      return 'value';
+    }
   });
 
   // 获取最初传入的 props 和通过 setProps 事件传入的 props 合集

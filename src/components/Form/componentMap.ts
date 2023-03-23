@@ -23,6 +23,7 @@ import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import ApiSelect from './components/ApiSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
 import IconPicker from './components/IconPicker.vue';
+import SelectPicker from './components/SelectPicker.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
 
@@ -31,6 +32,7 @@ componentMap.set('NInputNumber', NInputNumber);
 componentMap.set('NAutoComplete', NAutoComplete);
 componentMap.set('NSelect', NSelect);
 componentMap.set('ApiSelect', ApiSelect);
+componentMap.set('SelectPicker', SelectPicker);
 componentMap.set('NTreeSelect', NTreeSelect);
 componentMap.set('NTree', NTree);
 componentMap.set('ApiTree', ApiTree);

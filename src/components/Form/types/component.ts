@@ -16,6 +16,7 @@ import type {
   SliderProps,
   DividerProps,
   RateProps,
+  TagProps,
 } from 'naive-ui';
 
 interface NInput {
@@ -141,6 +142,13 @@ interface NRate {
   componentProps?: RateProps;
 }
 
+interface SelectPicker {
+  component: 'SelectPicker';
+  componentProps: {
+    options: SelectPickerOption[];
+  };
+}
+
 export type ComponentMap =
   | NInput
   | NInputNumber
@@ -161,8 +169,15 @@ export type ComponentMap =
   | NSwitch
   | NSlider
   | NDivider
-  | NRate;
+  | NRate
+  | SelectPicker;
 
 export type ComponentType = Pick<ComponentMap, 'component'>['component'];
 
 export type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };
+
+export type SelectPickerOption = {
+  label: string;
+  color?: string;
+  path: string;
+} & TagProps;
