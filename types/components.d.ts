@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     CropperAvatar: typeof import('./../src/components/Cropper/src/CropperAvatar.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/common/DarkModeSwitch.vue')['default'];
+    Description: typeof import('./../src/components/Description/index.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormItem: typeof import('./../src/components/Form/components/FormItem.vue')['default'];
@@ -28,6 +29,8 @@ declare module '@vue/runtime-core' {
     NColorPicker: typeof import('naive-ui')['NColorPicker'];
     NConfigProvider: typeof import('naive-ui')['NConfigProvider'];
     NDataTable: typeof import('naive-ui')['NDataTable'];
+    NDescriptions: typeof import('naive-ui')['NDescriptions'];
+    NDescriptionsItem: typeof import('naive-ui')['NDescriptionsItem'];
     NDialogProvider: typeof import('naive-ui')['NDialogProvider'];
     NDivider: typeof import('naive-ui')['NDivider'];
     NDrawer: typeof import('naive-ui')['NDrawer'];
@@ -65,6 +68,7 @@ declare module '@vue/runtime-core' {
     NSwitch: typeof import('naive-ui')['NSwitch'];
     NTabPane: typeof import('naive-ui')['NTabPane'];
     NTabs: typeof import('naive-ui')['NTabs'];
+    NTag: typeof import('naive-ui')['NTag'];
     NTooltip: typeof import('naive-ui')['NTooltip'];
     NTree: typeof import('naive-ui')['NTree'];
     NTreeSelect: typeof import('naive-ui')['NTreeSelect'];
@@ -73,6 +77,7 @@ declare module '@vue/runtime-core' {
     RadioGroup: typeof import('./../src/components/Form/components/RadioGroup.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    SelectPicker: typeof import('./../src/components/Form/components/SelectPicker.vue')['default'];
     Table: typeof import('./../src/components/Table/index.vue')['default'];
     TableAction: typeof import('./../src/components/Table/components/TableAction.vue')['default'];
     Toolbars: typeof import('./../src/components/Table/components/toolbars.vue')['default'];
