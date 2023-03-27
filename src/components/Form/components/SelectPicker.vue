@@ -7,6 +7,7 @@
         :checked="typeChecked === item.path"
         :class="`tag-${item.path}`"
         checkable
+        :disabled="readonly"
         @update:checked="change($event, item.path)"
       >
         {{ item.label }}
@@ -17,6 +18,7 @@
         <n-tag
           :checked="hasCheck(item.value)"
           :class="[checkedClass(item.value)]"
+          :disabled="readonly"
           checkable
           @mouseenter="hoverCheck($event, item.value)"
           @mouseleave="hoverCheck($event, item.value)"
@@ -38,9 +40,11 @@
   const props = defineProps({
     options: { type: Array as PropType<SelectPickerOption[]>, default: () => [] },
     value: { type: Object as any, default: () => {} },
+    readonly: { type: Boolean, default: false },
+    firstChecked: { type: String, default: 'tipTime' },
   });
 
-  const typeChecked = ref('tipTime');
+  const typeChecked = ref(props.firstChecked);
   const checkValues = ref(new Map());
   const timeArr = inputDateRange(['00:00', '24:00']);
   const checkNew = ref<null | number>();
