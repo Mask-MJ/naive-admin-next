@@ -6,7 +6,11 @@
     @close="handleCancel"
     @negative-click="handleCancel"
   >
-    <slot></slot>
+    <n-scrollbar :style="{ maxHeight: `${height}px` }">
+      <div class="mr-7">
+        <slot></slot>
+      </div>
+    </n-scrollbar>
   </n-modal>
 </template>
 
@@ -73,4 +77,11 @@
   );
 </script>
 
-<style scoped></style>
+<style lang="scss">
+  .n-modal {
+    padding-right: 0;
+    .n-dialog__action {
+      margin-right: 28px;
+    }
+  }
+</style>

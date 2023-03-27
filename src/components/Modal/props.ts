@@ -9,5 +9,6 @@ export const basicProps = {
   positiveText: { type: String, default: t('components.modal.positiveText') },
   preset: { type: String, default: 'dialog' },
   showIcon: { type: Boolean, default: false },
+  height: { type: [String, Number], default: 500 },
   // closeFunc: Function as PropType<() => Promise<boolean>>,
 };
