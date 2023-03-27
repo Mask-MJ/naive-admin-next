@@ -1,5 +1,5 @@
-import { ButtonProps, PopconfirmProps, TooltipProps } from 'naive-ui';
-import { Size } from 'naive-ui/es/button/src/interface';
+import type { ButtonProps, PopconfirmProps, TooltipProps } from 'naive-ui';
+import type { Size } from 'naive-ui/es/button/src/interface';
 export interface ActionItem extends ButtonProps {
   onClick?: Fn;
   label?: string;
@@ -13,5 +13,6 @@ export interface ActionItem extends ButtonProps {
   // 业务控制是否显示
   ifShow?: boolean | ((action: ActionItem) => boolean);
   tooltip?: string | TooltipProps;
+  showTooltip?: boolean;
   size?: Size;
 }
