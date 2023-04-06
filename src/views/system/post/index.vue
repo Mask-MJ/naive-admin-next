@@ -24,7 +24,7 @@
     formConfig: { labelWidth: 100, schemas },
     rowKey: (rowData) => rowData.roleId,
     actionColumn: {
-      width: 200,
+      width: 150,
       title: '操作',
       flag: 'ACTION',
       key: 'ACTION',
