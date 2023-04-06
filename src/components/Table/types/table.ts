@@ -60,7 +60,7 @@ export interface BasicTableProps extends DataTableProps {
   // 操作栏
   actionColumn?: BasicColumn;
   // 文本超过宽度是否显示...
-  ellipsis?: boolean;
+  ellipsis?: boolean | object;
   // 是否显示序号列
   showIndexColumn?: boolean;
 }

@@ -31,8 +31,8 @@ export const basicProps = {
   useSearchForm: { type: Boolean, default: false },
   // 表单配置
   formConfig: { type: Object as PropType<Partial<BasicFormProps>>, default: null },
-  // 文本超过宽度是否显示...
-  ellipsis: { type: Boolean, default: true },
+  // 文本超过宽度是否显示... | 带提示的省略
+  ellipsis: { type: [Boolean, Object], default: () => ({ tooltip: true }) },
   // 在分页改变的时候清空选项
   clearSelectOnPageChange: { type: Boolean, default: false },
   // 操作栏

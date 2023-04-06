@@ -7,7 +7,7 @@ import { i18n } from '@/locales';
 
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const';
 
-const handleItem = (item: BasicColumn, ellipsis: boolean) => {
+const handleItem = (item: BasicColumn, ellipsis?: boolean | object) => {
   const { children } = item;
   item.align = item.align || DEFAULT_ALIGN;
   if (ellipsis) {
@@ -48,7 +48,7 @@ const handleIndexColumn = (
   if (!pushIndexColumns) return;
 
   const isFixedLeft = columns.some((item) => item.fixed === 'left');
-  const index = {
+  const index: BasicColumn = {
     flag: INDEX_COLUMN_FLAG,
     key: INDEX_COLUMN_FLAG,
     width: 50,
@@ -65,11 +65,7 @@ const handleIndexColumn = (
     },
     ...(isFixedLeft ? { fixed: 'left' } : {}),
   };
-  if (columns[0].type) {
-    columns.splice(1, 0, index as BasicColumn);
-  } else {
-    columns.unshift(index as BasicColumn);
-  }
+  columns.unshift(index);
 };
 
 const handleActionColumn = (propsRef: ComputedRef<BasicTableProps>, columns: BasicColumn[]) => {
@@ -102,8 +98,9 @@ export function useColumns(
     if (!columns) return [];
     const { ellipsis } = unref(propsRef);
     columns.forEach((item) => {
-      handleItem(item, Reflect.has(item, 'ellipsis') ? !!item.ellipsis : !!ellipsis);
+      handleItem(item, Reflect.has(item, 'ellipsis') ? item.ellipsis : ellipsis);
     });
+    console.log(columns);
     return columns;
   });
 
