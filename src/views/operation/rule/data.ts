@@ -38,6 +38,14 @@ export const schemas: FormSchema[] = [
 ];
 
 export const columns: BasicColumn[] = [
+  // {
+  //   title: '序号',
+  //   key: 'index',
+  //   width: 100,
+  //   render: (rowData, rowIndex) => {
+  //     return rowIndex;
+  //   },
+  // },
   {
     title: '规则名称',
     key: 'ruleName',
