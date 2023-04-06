@@ -1,6 +1,6 @@
 <template>
   <dark-mode-container
-    class="flex-y-center h-full border-b-1 border-gray-200"
+    class="flex-y-center h-full border-b-1 border-gray-200 dark:border-gray-700"
     :style="{ height }"
     :inverted="header.inverted"
   >
